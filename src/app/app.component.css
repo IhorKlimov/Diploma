@@ -1,0 +1,29 @@
+a {
+    text-decoration: none;
+    color: rgb(105, 105, 131);
+    font-weight: 600;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.title {
+    font-weight: bold;
+}
+
+mat-toolbar {
+    background-color: white;
+    color: darkslategray;
+    border-bottom: darkslategray 1px solid;
+}
+
+a.active {
+    color: darkslategray;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
