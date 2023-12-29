@@ -18,6 +18,8 @@ mat-toolbar {
     background-color: white;
     color: darkslategray;
     border-bottom: darkslategray 1px solid;
+    position: sticky;
+    top: 0;
 }
 
 a.active {

@@ -1,4 +1,5 @@
-export interface Recepie {
+export interface Recipe {
+    id: string,
     title: string,
     imageUrl: string,
     description: string

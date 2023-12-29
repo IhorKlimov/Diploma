@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FeedRecepieComponent } from './feed-recepie.component';
+import { FeedRecipeComponent } from './feed-recipe.component';
 
-describe('FeedRecepieComponent', () => {
-  let component: FeedRecepieComponent;
-  let fixture: ComponentFixture<FeedRecepieComponent>;
+describe('FeedRecipeComponent', () => {
+  let component: FeedRecipeComponent;
+  let fixture: ComponentFixture<FeedRecipeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FeedRecepieComponent]
+      imports: [FeedRecipeComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(FeedRecepieComponent);
+    fixture = TestBed.createComponent(FeedRecipeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
