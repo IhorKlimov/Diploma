@@ -1,0 +1,15 @@
+.root {
+    margin-bottom: 20px;
+    margin-top: 20px;
+    display: flex;
+    column-gap: 20px;
+}
+
+.right {
+    flex-direction: column;
+    display: flex;
+}
+
+.time {
+    font-size: 12px;
+}

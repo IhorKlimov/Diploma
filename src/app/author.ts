@@ -1,4 +1,5 @@
 export interface Author {
     id: number,
-    name: string
+    name: string,
+    imageUrl: string
 }

@@ -4,8 +4,31 @@
     margin-top: 50px;
 }
 
-img{
+img {
     width: 100%;
     height: 300px;
     object-fit: cover;
+}
+
+.divider {
+    margin-top: 40px;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(128, 128, 128, 0.459);
+}
+
+.add-review {
+    display: flex;
+    margin-bottom: 60px;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+}
+
+.add-review span {
+    margin-right: 10px;
+}
+
+.add-review input {
+    width: 100%;
 }

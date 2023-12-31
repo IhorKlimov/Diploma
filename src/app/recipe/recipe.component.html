@@ -7,7 +7,19 @@
 
     <p>{{recipe.description}}</p>
 
+    <div class="divider"></div>
+
     <h3>Reviews</h3>
 
+
+    <div class="add-review">
+        <p>
+            <span>Rate and comment</span>
+            <p-rating [(ngModel)]="selectedRating" [cancel]="false"></p-rating>
+        </p>
+        <input type="text" pInputText [(ngModel)]="reviewText" />
+    </div>
+
+    <app-review *ngFor="let review of reviews" [review]="review" />
 
 </div>
