@@ -1,7 +1,7 @@
 a {
     text-decoration: none;
     color: rgb(105, 105, 131);
-    font-weight: 600;
+    font-weight: 500;
     padding-left: 10px;
     padding-right: 10px;
 }
@@ -19,6 +19,7 @@ mat-toolbar {
     color: darkslategray;
     border-bottom: darkslategray 1px solid;
     position: sticky;
+    z-index: 1;
     top: 0;
 }
 
@@ -28,4 +29,10 @@ a.active {
 
 .spacer {
     flex: 1 1 auto;
+}
+
+img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
 }
