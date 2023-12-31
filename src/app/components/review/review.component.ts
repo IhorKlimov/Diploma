@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Review } from '../review';
+import { Review } from '../../interfaces/review';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 import { TimeagoModule } from 'ngx-timeago';

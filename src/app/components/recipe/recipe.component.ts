@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { Recipe } from '../recipe';
+import { Recipe } from '../../interfaces/recipe';
 import { RatingModule } from 'primeng/rating';
 import { FormsModule } from '@angular/forms';
 import { DatePipe, NgFor } from '@angular/common';
 import { ReviewComponent } from '../review/review.component';
-import { Review } from '../review';
+import { Review } from '../../interfaces/review';
 import { InputTextModule } from 'primeng/inputtext';
 
 @Component({

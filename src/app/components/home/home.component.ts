@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { NgFor } from '@angular/common';
 import { FeedRecipeComponent } from '../feed-recipe/feed-recipe.component';
-import { Recipe } from '../recipe';
+import { Recipe } from '../../interfaces/recipe';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
-import { Category } from '../category';
+import { Category } from '../../interfaces/category';
 import { MultiSelectModule } from 'primeng/multiselect';
 
 @Component({
