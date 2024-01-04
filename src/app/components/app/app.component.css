@@ -6,6 +6,15 @@ a {
     padding-right: 10px;
 }
 
+.app-title {
+    display: flex;
+    align-items: center;
+}
+
+.app-title:hover {
+    text-decoration: none;
+}
+
 a:hover {
     text-decoration: underline;
 }

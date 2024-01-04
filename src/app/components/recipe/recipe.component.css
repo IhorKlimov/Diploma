@@ -32,3 +32,9 @@ img {
 .add-review input {
     width: 100%;
 }
+
+.input {
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+}

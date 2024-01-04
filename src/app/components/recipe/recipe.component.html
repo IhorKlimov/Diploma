@@ -17,7 +17,11 @@
             <span>Rate and comment</span>
             <p-rating [(ngModel)]="selectedRating" [cancel]="false"></p-rating>
         </p>
-        <input type="text" pInputText [(ngModel)]="reviewText" />
+        <div class="input">
+            <p-avatar [image]="currentUser.imageUrl" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
+            <input type="text" pInputText [(ngModel)]="reviewText" />
+            <p-button label="Comment"></p-button>
+        </div>
     </div>
 
     <app-review *ngFor="let review of reviews" [review]="review" />
