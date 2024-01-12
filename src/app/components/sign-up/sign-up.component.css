@@ -22,11 +22,11 @@ input {
     width: 100%;
 }
 
-.p-field label {
+.input-field label {
     margin-left: 10px;
 }
 
-.p-field input {
+.input-field input {
     margin-top: 5px;
 }
 

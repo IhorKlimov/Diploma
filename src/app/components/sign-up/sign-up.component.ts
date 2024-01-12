@@ -14,14 +14,22 @@ import { JsonPipe, NgClass, NgIf } from '@angular/common';
 })
 export class SignUpComponent {
   form!: FormGroup;
+  passwordRegex = new RegExp("^((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\\W]).{8,})$");
 
   ngOnInit() {
     this.form = new FormGroup({
       userName: new FormControl("", [Validators.required]),
       email: new FormControl("", [Validators.required, Validators.email]),
-      password: new FormControl("", [Validators.required]),
-      confirmPassword: new FormControl("", [Validators.required])
+      password: new FormControl("", [Validators.required, this.passwordValidator()]),
+      confirmPassword: new FormControl("", [Validators.required, this.passwordValidator()])
     }, { validators: this.matchingPasswordsValidator });
+  }
+
+  passwordValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      let isValid = this.passwordRegex.test(control.value);
+      return isValid ? null : { passwordValidator: "Wrong password" };
+    };
   }
 
   isFieldValid(name: string) {
@@ -40,7 +48,6 @@ export class SignUpComponent {
   ): ValidationErrors | null => {
     const password = control.get('password')?.value;
     const confirmPassword = control.get('confirmPassword')?.value;
-    console.log(password, confirmPassword)
     return password != confirmPassword ? { matchingPasswords: "Passwords don't match" } : null;
   };
 
