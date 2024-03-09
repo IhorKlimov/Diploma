@@ -5,20 +5,24 @@ import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, FormsM
 import { PasswordModule } from 'primeng/password';
 import { JsonPipe, NgClass, NgIf } from '@angular/common';
 import { AuthorService } from '../../services/author.service';
+import { FileUploadModule } from 'primeng/fileupload';
 import { lastValueFrom } from 'rxjs';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-  imports: [InputTextModule, ButtonModule, FormsModule, PasswordModule, NgIf, ReactiveFormsModule, NgClass, JsonPipe],
+  imports: [InputTextModule, ButtonModule, FormsModule, PasswordModule, NgIf, ReactiveFormsModule, NgClass, JsonPipe, FileUploadModule, ToastModule],
   templateUrl: './sign-up.component.html',
-  styleUrl: './sign-up.component.css'
+  styleUrl: './sign-up.component.css',
+  providers: [MessageService]
 })
 export class SignUpComponent {
   form!: FormGroup;
   passwordRegex = new RegExp("^((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\\W]).{8,})$");
 
-  constructor(private authorService: AuthorService) { }
+  constructor(private authorService: AuthorService, private messageService: MessageService,) { }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -57,14 +61,18 @@ export class SignUpComponent {
   };
 
   async onSubmit() {
-    let result = await lastValueFrom(this.authorService.createAuthor(
-      this.form.get('userName')?.value,
-      this.form.get('email')?.value,
-      this.form.get('password')?.value,
-      ""
-    ));
-
-    console.log(result);
+    try {
+      let result = await lastValueFrom(this.authorService.createAuthor(
+        this.form.get('userName')?.value,
+        this.form.get('email')?.value,
+        this.form.get('password')?.value,
+        ""
+      ))
+      console.log(result);
+    } catch (error: any) {
+      console.log(error)
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error });
+    } ;
   }
 
 }
