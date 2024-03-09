@@ -5,7 +5,11 @@
         <div class="space"></div>
 
         <div class="input-field">
-            <label for="username">Username</label>
+            <input id="photo" name="photo" type="file" name="file" formControlName="photo"/>
+        </div>
+
+        <div class="input-field">
+            <label for="username">User name</label>
             <input id="username" type="text" name="username" pInputText id="username" formControlName="userName" />
             <small class="p-error" *ngIf="!isFieldValid('userName')">User name is required</small>
         </div>
@@ -20,18 +24,20 @@
             <label for="password">Password</label>
             <input id="password" type="password" name="password" pPassword [feedback]="false"
                 formControlName="password" />
-            <small class="p-error" *ngIf="!isFieldValid('password')">Password must be at least 8 characters, contain lower, upper case characters, at least 1 special character and 1 number</small>
+            <small class="p-error" *ngIf="!isFieldValid('password')">Password must be at least 8 characters, contain
+                lower, upper case characters, at least 1 special character and 1 number</small>
         </div>
 
         <div class="input-field">
             <label for="confirmPassword">Confirm password</label>
             <input id="confirmPassword" type="password" name="confirmPassword" pPassword [feedback]="false"
                 formControlName="confirmPassword" />
-            <small class="p-error" *ngIf="!isFieldValid('confirmPassword')">Password must be at least 8 characters, contain lower, upper case characters, at least 1 special character and 1 number</small>
+            <small class="p-error" *ngIf="!isFieldValid('confirmPassword')">Password must be at least 8 characters,
+                contain lower, upper case characters, at least 1 special character and 1 number</small>
             <small class="p-error" *ngIf="passwordsDontMatch()">Passwords need to match</small>
         </div>
 
-        
         <button type="button" pButton type="submit" [disabled]="!form.valid">Sign up</button>
     </form>
+
 </div>
