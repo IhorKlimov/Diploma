@@ -11,7 +11,12 @@
     <a class="button" routerLinkActive="active" routerLink="create-recipes">Create recipe</a>
     <a class="button" routerLinkActive="active" routerLink="notifications">Notifications</a>
     <a class="button" routerLinkActive="active" routerLink="about">About</a>
-    <a class="button" routerLinkActive="active" routerLink="signUp">Sign up</a>
+
+    <a *ngIf="isLoggedIn; else loggedOut" class="button" (click)="logOut()">Log out</a>
+    <ng-template #loggedOut>
+      <a class="button" routerLink="signUp">Sign up</a>
+    </ng-template>
+
   </nav>
 </mat-toolbar>
 

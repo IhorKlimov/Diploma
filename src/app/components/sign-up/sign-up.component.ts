@@ -10,6 +10,7 @@ import { lastValueFrom } from 'rxjs';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { RouterLink, RouterLinkActive, RouterOutlet, Router } from '@angular/router';
+import { LocalStorageService } from '../../services/local-storage.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -24,7 +25,12 @@ export class SignUpComponent {
   form!: FormGroup;
   passwordRegex = new RegExp("^((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\\W]).{8,})$");
 
-  constructor(private authorService: AuthorService, private messageService: MessageService, private router: Router,) { }
+  constructor(
+    private authorService: AuthorService,
+    private messageService: MessageService,
+    private router: Router,
+    private localStorageService: LocalStorageService,
+  ) { }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -71,7 +77,7 @@ export class SignUpComponent {
         ""
       ))
       console.log(result);
-      localStorage.setItem("session", result.sessionId);
+      this.localStorageService.setSession(result.sessionId);
       this.router.navigate(['/']);
     } catch (error: any) {
       console.log(error)
