@@ -5,7 +5,7 @@
         <div class="space"></div>
 
         <div class="input-field">
-            <input id="photo" name="photo" type="file" name="file" formControlName="photo"/>
+            <input id="photo" name="photo" type="file" name="file" formControlName="photo" />
         </div>
 
         <div class="input-field">
@@ -40,5 +40,9 @@
         <p-toast></p-toast>
         <button type="button" pButton type="submit" [disabled]="!form.valid">Sign up</button>
     </form>
+
+    <div>
+        <p>Already have an account? <a routerLink="/login">Log in</a></p>
+    </div>
 
 </div>

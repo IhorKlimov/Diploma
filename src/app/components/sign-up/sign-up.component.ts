@@ -5,15 +5,17 @@ import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, FormsM
 import { PasswordModule } from 'primeng/password';
 import { JsonPipe, NgClass, NgIf } from '@angular/common';
 import { AuthorService } from '../../services/author.service';
-import { FileUploadModule } from 'primeng/fileupload';
+import { FileUploadEvent, FileUploadModule } from 'primeng/fileupload';
 import { lastValueFrom } from 'rxjs';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { RouterLink, RouterLinkActive, RouterOutlet, Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-  imports: [InputTextModule, ButtonModule, FormsModule, PasswordModule, NgIf, ReactiveFormsModule, NgClass, JsonPipe, FileUploadModule, ToastModule],
+  imports: [InputTextModule, ButtonModule, FormsModule, PasswordModule,
+    NgIf, ReactiveFormsModule, NgClass, JsonPipe, FileUploadModule, ToastModule, RouterLink,],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.css',
   providers: [MessageService]
@@ -22,7 +24,7 @@ export class SignUpComponent {
   form!: FormGroup;
   passwordRegex = new RegExp("^((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\\W]).{8,})$");
 
-  constructor(private authorService: AuthorService, private messageService: MessageService,) { }
+  constructor(private authorService: AuthorService, private messageService: MessageService, private router: Router,) { }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -69,10 +71,16 @@ export class SignUpComponent {
         ""
       ))
       console.log(result);
+      localStorage.setItem("session", result.sessionId);
+      this.router.navigate(['/']);
     } catch (error: any) {
       console.log(error)
       this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error });
-    } ;
+    };
+  }
+
+  onUpload(event: FileUploadEvent) {
+    this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
   }
 
 }

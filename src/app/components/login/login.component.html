@@ -1,1 +1,29 @@
-<p>login works!</p>
+<div class="root">
+    <form class="content" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <h1>Log in</h1>
+
+        <div class="space"></div>
+
+        <div class="input-field">
+            <label for="email">E-mail</label>
+            <input pInputText formControlName="email" id="email" />
+            <small class="p-error" *ngIf="!isFieldValid('email')">Please enter a valid email</small>
+        </div>
+
+        <div class="input-field">
+            <label for="password">Password</label>
+            <input id="password" type="password" name="password" pPassword [feedback]="false"
+                formControlName="password" />
+            <small class="p-error" *ngIf="!isFieldValid('password')">Password must be at least 8 characters, contain
+                lower, upper case characters, at least 1 special character and 1 number</small>
+        </div>
+
+        <p-toast></p-toast>
+        <button type="button" pButton type="submit" [disabled]="!form.valid">Log in</button>
+    </form>
+
+    <div>
+        <p>Don't have an account yet? <a routerLink="/signUp">Sign up</a></p>
+    </div>
+
+</div>
