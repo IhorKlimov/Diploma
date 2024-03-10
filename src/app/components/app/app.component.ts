@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
     });
     this.appStateService.getMessage.subscribe(message => {
       if (message != null) {
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'message' });
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
       }
     });
   }

@@ -52,7 +52,6 @@ export class CreateRecipeComponent implements OnInit {
         'demo',
       ));
 
-      this.localStorageService.setSession(null);
       this.router.navigate([`recipe/${response.recipeId}`]);
       this.appStateService.setMessage('Created a new recipe');
     } catch (error: any) {
