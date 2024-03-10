@@ -1,0 +1,20 @@
+<div class="root">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <h1>Create a new recipe</h1>
+
+
+        <div class="title-root">
+            <span class="p-float-label">
+                <input pInputText id="title" formControlName="title" autofocus />
+                <label for="title">Recipe name</label>
+            </span>
+        </div>
+
+        <div class="card">
+            <p-editor #editor formControlName="text" [style]="{ minHeight: '350px'}"
+                (onInit)="onInitEditor($event)"></p-editor>
+        </div>
+
+        <button type="button" pButton type="submit" [disabled]="!form.valid">Create</button>
+    </form>
+</div>

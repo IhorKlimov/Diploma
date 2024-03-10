@@ -8,8 +8,9 @@
     <a class="button" routerLinkActive="active" routerLink="" [routerLinkActiveOptions]="{exact: true}">Home</a>
     <a *ngIf="isLoggedIn" class="button" routerLinkActive="active" routerLink="my-recipes">My recipes</a>
     <a *ngIf="isLoggedIn" class="button" routerLinkActive="active" routerLink="saved-recipes">Saved recipes</a>
-    <a *ngIf="isLoggedIn" class="button" routerLinkActive="active" routerLink="create-recipes">Create recipe</a>
+    <a *ngIf="isLoggedIn" class="button" routerLinkActive="active" routerLink="create-recipe">Create recipe</a>
     <a *ngIf="isLoggedIn" class="button" routerLinkActive="active" routerLink="notifications">Notifications</a>
+    <a *ngIf="isLoggedIn" class="button" routerLinkActive="active" routerLink="edit-profile">Edit profile</a>
     <a class="button" routerLinkActive="active" routerLink="about">About</a>
 
     <a *ngIf="isLoggedIn; else loggedOut" class="button" (click)="logOut()">Log out</a>
@@ -21,3 +22,5 @@
 </mat-toolbar>
 
 <router-outlet></router-outlet>
+
+<p-toast></p-toast>

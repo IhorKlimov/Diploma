@@ -1,0 +1,30 @@
+.root {
+    margin-left: 116px;
+    margin-right: 116px;
+    margin-top: 25px;
+}
+
+h1 {
+    text-align: center;
+}
+
+button {
+    margin-top: 25px;
+    width: 250px;
+    display: inline-block;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card {
+    margin-top: 25px;
+    width: 100%;
+}
+
+.title-root {
+    width: 100%;
+}

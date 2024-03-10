@@ -7,27 +7,25 @@ import { JsonPipe, NgClass, NgIf } from '@angular/common';
 import { AuthorService } from '../../services/author.service';
 import { FileUploadEvent, FileUploadModule } from 'primeng/fileupload';
 import { lastValueFrom } from 'rxjs';
-import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
 import { RouterLink, RouterLinkActive, RouterOutlet, Router } from '@angular/router';
 import { LocalStorageService } from '../../services/local-storage.service';
+import { AppStateService } from '../../services/app-state.service';
 
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [InputTextModule, ButtonModule, FormsModule, PasswordModule,
-    NgIf, ReactiveFormsModule, NgClass, JsonPipe, FileUploadModule, ToastModule, RouterLink,],
+    NgIf, ReactiveFormsModule, NgClass, JsonPipe, FileUploadModule, RouterLink,],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
-  providers: [MessageService],
 })
 export class LoginComponent {
   form!: FormGroup;
 
   constructor(
     private authorService: AuthorService,
-    private messageService: MessageService,
+    private appStateService: AppStateService,
     private router: Router,
     private localStorageService: LocalStorageService,
   ) { }
@@ -50,7 +48,7 @@ export class LoginComponent {
       this.router.navigate(['/']);
     } catch (error: any) {
       console.log(error);
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error });
+      this.appStateService.setError(error.error);
     };
   }
 
