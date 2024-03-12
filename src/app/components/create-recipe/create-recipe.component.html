@@ -3,6 +3,10 @@
         <h1>Create a new recipe</h1>
 
 
+        <div class="form-group">
+            <input type="file" id="file" (change)="onFileChange($event)">
+        </div>
+
         <div class="title-root">
             <span class="p-float-label">
                 <input pInputText id="title" formControlName="title" autofocus />

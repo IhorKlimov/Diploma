@@ -11,6 +11,7 @@ import { lastValueFrom } from 'rxjs';
 import { AppStateService } from '../../services/app-state.service';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { RecipeService } from '../../services/recipe.service';
+import { FileStorageService } from '../../services/file-storage.service';
 
 @Component({
   selector: 'app-create-recipe',
@@ -28,11 +29,12 @@ export class CreateRecipeComponent implements OnInit {
     private router: Router,
     private recipeService: RecipeService,
     private appStateService: AppStateService,
+    private fileStorageService: FileStorageService,
   ) { }
 
   ngOnInit() {
     this.form = new FormGroup({
-      photo: new FormControl(null, []),
+      image: new FormControl<File | null>(null, [Validators.required]),
       title: new FormControl(null, [Validators.required]),
       text: new FormControl(null, [Validators.required]),
     }, {});
@@ -43,13 +45,12 @@ export class CreateRecipeComponent implements OnInit {
   }
 
   async onSubmit() {
-    console.log(this.form.get('text')?.value);
-
     try {
+      const imageUploadingResult = await lastValueFrom(this.fileStorageService.uploadFile(this.form.get('image')?.value));
       const response = await lastValueFrom(this.recipeService.createRecipe(
         this.form.get('title')?.value,
         this.form.get('text')?.value,
-        'demo',
+        imageUploadingResult.imageUrl,
       ));
 
       this.router.navigate([`recipe/${response.recipeId}`]);
@@ -61,6 +62,14 @@ export class CreateRecipeComponent implements OnInit {
         this.localStorageService.setSession(null);
         this.router.navigate(['/']);
       }
+    }
+  }
+
+  onFileChange(event: Event) {
+    const target = (event.target as HTMLInputElement);
+    if (target.files != null) {
+      const file = target.files[0];
+      this.form.get('image')?.setValue(file);
     }
   }
 }
