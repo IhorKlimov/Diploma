@@ -1,21 +1,21 @@
-import { Component, Input } from '@angular/core';
-import { NgFor } from '@angular/common';
-import { FeedRecipeComponent } from '../feed-recipe/feed-recipe.component';
-import { Recipe } from '../../interfaces/recipe';
-import { InputTextModule } from 'primeng/inputtext';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Category } from '../../interfaces/category';
+import { InputTextModule } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { FeedRecipeComponent } from '../feed-recipe/feed-recipe.component';
+import { NgFor } from '@angular/common';
 import { FeedService } from '../../services/feed.service';
+import { Category } from '../../interfaces/category';
+import { Recipe } from '../../interfaces/recipe';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-my-recipes',
   standalone: true,
   imports: [NgFor, FeedRecipeComponent, FormsModule, InputTextModule, MultiSelectModule],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  templateUrl: './my-recipes.component.html',
+  styleUrl: './my-recipes.component.css'
 })
-export class HomeComponent {
+export class MyRecipesComponent {
   searchQuery: string | undefined;
   categories!: Category[];
 
@@ -42,9 +42,8 @@ export class HomeComponent {
         name: "Deserts"
       },
     ];
-    this.feedService.getRecipes(null, false).subscribe(data => this.recipes = data);
+    this.feedService.getRecipes(null, true).subscribe(data => this.recipes = data);
   }
 
   recipes: Recipe[] = []
-
 }

@@ -1,7 +1,7 @@
 import { CommonModule, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private messageService: MessageService,
     private appStateService: AppStateService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -44,5 +45,6 @@ export class AppComponent implements OnInit {
 
   logOut() {
     this.localStorageService.setSession(null);
+    this.router.navigate(['/']);
   }
 }
