@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 })
 export class AppStateService {
   private error = new Subject<string | null>();
+  private userUpdated = new Subject<boolean | null>();
   private message = new Subject<string | null>();
 
   constructor() { }
@@ -24,5 +25,13 @@ export class AppStateService {
 
   get getMessage() {
     return this.message.asObservable();
+  }
+
+  setUserUpdated() {
+    this.userUpdated.next(true);
+  }
+
+  get getUserUpdated() {
+    return this.userUpdated.asObservable();
   }
 }

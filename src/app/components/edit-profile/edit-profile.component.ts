@@ -94,6 +94,7 @@ export class EditProfileComponent implements OnInit {
         ));
 
         this.appStateService.setMessage(result.status);
+        this.appStateService.setUserUpdated();
       }
     } catch (error: any) {
       this.appStateService.setError(error.error);

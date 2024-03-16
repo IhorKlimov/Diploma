@@ -6,11 +6,18 @@ import { LocalStorageService } from '../../services/local-storage.service';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { AppStateService } from '../../services/app-state.service';
+import { AvatarModule } from 'primeng/avatar';
+import { AvatarGroupModule } from 'primeng/avatargroup';
+import { Author } from '../../interfaces/author';
+import { AuthorService } from '../../services/author.service';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { Button, ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, MatToolbarModule, RouterLink, RouterLinkActive, NgIf, ToastModule,],
+  imports: [CommonModule, RouterOutlet, MatToolbarModule, RouterLink, RouterLinkActive, NgIf, ToastModule,
+    AvatarModule, AvatarGroupModule, OverlayPanelModule, ButtonModule,],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   providers: [MessageService],
@@ -18,6 +25,7 @@ import { AppStateService } from '../../services/app-state.service';
 export class AppComponent implements OnInit {
   title = 'culinary_blog';
   isLoggedIn = localStorage.getItem('session') != null;
+  user?: Author | null;
 
   constructor(
     private storageService: LocalStorageService,
@@ -25,11 +33,15 @@ export class AppComponent implements OnInit {
     private messageService: MessageService,
     private appStateService: AppStateService,
     private router: Router,
+    private authorService: AuthorService,
   ) { }
 
   ngOnInit() {
     this.storageService.getSession.subscribe(value => {
       this.isLoggedIn = value != null;
+      if (value != null) {
+        this.fetchUser(value);
+      }
     });
     this.appStateService.getError.subscribe(error => {
       if (error != null) {
@@ -41,10 +53,31 @@ export class AppComponent implements OnInit {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
       }
     });
+    this.appStateService.getUserUpdated.subscribe(value => {
+      const sessionId = localStorage.getItem('session');
+      if (sessionId) {
+        this.fetchUser(sessionId);
+      }
+    });
+    this.localStorageService.setSession(localStorage.getItem('session'));
   }
 
-  logOut() {
+  fetchUser(session: string) {
+    this.authorService.getUser(null, session).subscribe(
+      {
+        next: (v) => this.user = v,
+        error: (e) => this.appStateService.setError(e.error),
+      }
+    );
+  }
+
+  logOut(op: any) {
     this.localStorageService.setSession(null);
     this.router.navigate(['/']);
+    this.hideOverlay(op);
+  }
+
+  hideOverlay(op: any) {
+    op.hide();
   }
 }

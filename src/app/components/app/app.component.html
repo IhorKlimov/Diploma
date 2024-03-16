@@ -10,10 +10,36 @@
     <a *ngIf="isLoggedIn" class="button" routerLinkActive="active" routerLink="saved-recipes">Saved recipes</a>
     <a *ngIf="isLoggedIn" class="button" routerLinkActive="active" routerLink="create-recipe">Create recipe</a>
     <a *ngIf="isLoggedIn" class="button" routerLinkActive="active" routerLink="notifications">Notifications</a>
-    <a *ngIf="isLoggedIn" class="button" routerLinkActive="active" routerLink="edit-profile">Edit profile</a>
+
     <a class="button" routerLinkActive="active" routerLink="about">About</a>
 
-    <a *ngIf="isLoggedIn; else loggedOut" class="button" (click)="logOut()">Log out</a>
+
+    <div *ngIf="isLoggedIn; then thenBlock else loggedOut"></div>
+    <ng-template #thenBlock>
+
+      <p-overlayPanel #op>
+        <ng-template pTemplate="content">
+          <div class="profile-menu">
+            <div class="username">{{user?.userName}}</div>
+            <div class="email">{{user?.email}}</div>
+            <a *ngIf="isLoggedIn" class="button" routerLink="edit-profile" (click)="hideOverlay(op)">Edit profile</a>
+            <a class="button" (click)="logOut(op)">Log out</a>
+          </div>
+        </ng-template>
+      </p-overlayPanel>
+
+      <div (click)="op.toggle($event)">
+        <p-avatar *ngIf="user?.imageUrl; else withoutPhoto" shape="circle" styleClass="mr-2" size="normal"
+          [image]="user?.imageUrl"></p-avatar>
+        <ng-template #withoutPhoto>
+          <p-avatar shape="circle" styleClass="mr-2" size="normal" [style]="{'background-color': '#9c27b0'}"
+            [label]="user?.userName?.charAt(0)?.toUpperCase()"></p-avatar>
+        </ng-template>
+      </div>
+
+
+    </ng-template>
+
     <ng-template #loggedOut>
       <a class="button" routerLink="signUp">Sign up</a>
     </ng-template>
