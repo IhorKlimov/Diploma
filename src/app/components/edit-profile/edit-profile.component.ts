@@ -82,6 +82,8 @@ export class EditProfileComponent implements OnInit {
       if (photo != null) {
         let fileUploadResult = await lastValueFrom(this.fileStorageService.uploadFile(photo));
         photo = fileUploadResult.imageUrl;
+      } else {
+        photo = this.form.get('photo')?.value;
       }
 
       const sessionId = localStorage.getItem('session');
