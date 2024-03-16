@@ -7,14 +7,16 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { CreateRecipeComponent } from './components/create-recipe/create-recipe.component';
 import { MyRecipesComponent } from './components/my-recipes/my-recipes.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { EditRecipeComponent } from './components/edit-recipe/edit-recipe.component';
 
 export const routes: Routes = [
-    { path: "", component: HomeComponent },
-    { path: "recipe/:id", component: RecipeComponent },
-    { path: "login", component: LoginComponent },
-    { path: "signUp", component: SignUpComponent },
-    { path: "my-recipes", component: MyRecipesComponent },
-    { path: "create-recipe", component: CreateRecipeComponent },
-    { path: "edit-profile", component: EditProfileComponent },
+    { path: '', component: HomeComponent },
+    { path: 'login', component: LoginComponent },
+    { path: 'signUp', component: SignUpComponent },
+    { path: 'edit-profile', component: EditProfileComponent },
+    { path: 'recipe/:id', component: RecipeComponent },
+    { path: 'my-recipes', component: MyRecipesComponent },
+    { path: 'create-recipe', component: CreateRecipeComponent },
+    { path: 'edit-recipe', component: EditRecipeComponent, },
     { path: '**', component: PageNotFoundComponent }
 ];
