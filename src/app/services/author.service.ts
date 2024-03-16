@@ -46,7 +46,7 @@ export class AuthorService {
     return this.http.get<Author>(url, { headers });
   }
 
-  updateUser(userName: string, imageUrl: string | null, session: string,) {
+  updateUser(userName: string, imageUrl: string, session: string,) {
     let url = 'http://localhost:3000/author';
 
     let headers = new HttpHeaders({
@@ -56,9 +56,7 @@ export class AuthorService {
 
     let body = new URLSearchParams();
     body.set('userName', userName);
-    if (imageUrl) {
-      body.set('imageUrl', imageUrl);
-    }
+    body.set('imageUrl', imageUrl);
 
     return this.http.put<AuthorUpdateResult>(url, body, { headers });
   }

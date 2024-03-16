@@ -82,7 +82,6 @@ export class EditProfileComponent implements OnInit {
       if (photo != null) {
         let fileUploadResult = await lastValueFrom(this.fileStorageService.uploadFile(photo));
         photo = fileUploadResult.imageUrl;
-        console.log(fileUploadResult);
       }
 
       const sessionId = localStorage.getItem('session');
@@ -97,7 +96,6 @@ export class EditProfileComponent implements OnInit {
         this.appStateService.setMessage(result.status);
       }
     } catch (error: any) {
-      console.log(error)
       this.appStateService.setError(error.error);
     };
   }
