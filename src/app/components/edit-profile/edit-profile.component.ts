@@ -21,7 +21,11 @@ export class EditProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.authorService.getUser(null, localStorage.getItem('session')).subscribe(
-      u => this.user = u, error => this.appStateService.setError(error.error));
+      {
+        next: (u) => this.user = u,
+        error: (error) => this.appStateService.setError(error.error),
+      }
+    );
   }
 
 
