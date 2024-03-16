@@ -2,11 +2,28 @@
     <form class="content" [formGroup]="form" (ngSubmit)="onSubmit()">
         <h1>Sign up</h1>
 
-        <div class="space"></div>
+        <div class="photo-picker">
+            <label for="image-picker">
+                <img *ngIf="form.get('photo')?.value != null" [src]="form.get('photo')?.value">
+                <i *ngIf="form.get('photo')?.value == null" class="pi pi-camera"></i>
+            </label>
+            <input id="image-picker" type="file" (change)="fileChangeEvent($event)" accept="image/*"
+                formControlName="originalPhoto" />
 
-        <div class="input-field">
-            <input id="photo" name="photo" type="file" name="file" formControlName="photo" />
+            <i *ngIf="form.get('photo')?.value != null" class="pi pi-times" (click)="cancelPhoto()"></i>
         </div>
+
+        <p-dialog header="Crop your photo" [(visible)]="visible" [modal]="true" [style]="{ width: '50rem' }"
+            [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" (onHide)="onHideDialog()">
+
+            <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1 / 1"
+                format="png" output="base64" (imageCropped)="imageCropped($event)"></image-cropper>
+
+            <ng-template pTemplate="footer">
+                <div class="spacer"></div>
+                <p-button icon="pi pi-check" (click)="cropImage()" label="Ok" pAutoFocus [autofocus]="true"></p-button>
+            </ng-template>
+        </p-dialog>
 
         <div class="input-field">
             <label for="username">User name</label>
@@ -43,5 +60,7 @@
     <div>
         <p>Already have an account? <a routerLink="/login">Log in</a></p>
     </div>
+
+
 
 </div>

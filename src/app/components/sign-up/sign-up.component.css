@@ -47,3 +47,48 @@ button {
     flex-direction: column;
     width: 100%;
 }
+
+.photo-picker {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.photo-picker label {
+    cursor: pointer;
+    background-color: hsla(0, 0%, 83%, 0.462);
+    width: 100px;
+    height: 100px;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+}
+
+.photo-picker i {
+    font-size: 2.5rem;
+    position: absolute;
+}
+
+.photo-picker img {
+    width: 100%;
+    border-radius: 50px;
+    position: absolute;
+    height: 100%;
+}
+
+.photo-picker input {
+    display: none;
+}
+
+.spacer {
+    height: 20px;
+}
+
+.photo-picker .pi-times {
+    font-size: 1rem;
+    cursor: pointer;
+    transform: translate(55px, -35px);
+}

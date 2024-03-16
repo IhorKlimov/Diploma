@@ -15,7 +15,9 @@ export class AuthorService {
     body.set("userName", userName);
     body.set("email", email);
     body.set("password", password);
-    body.set("imageUrl", imageUrl);
+    if (imageUrl) {
+      body.set("imageUrl", imageUrl);
+    }
 
     let headers = new HttpHeaders({ "Content-Type": "application/x-www-form-urlencoded" });
     console.log(body)

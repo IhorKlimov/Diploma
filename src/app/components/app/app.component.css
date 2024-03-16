@@ -37,7 +37,7 @@ mat-toolbar {
 }
 
 a.active {
-    color: darkslategray;
+    color: black;
 }
 
 .spacer {
