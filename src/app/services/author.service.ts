@@ -20,7 +20,6 @@ export class AuthorService {
     }
 
     let headers = new HttpHeaders({ "Content-Type": "application/x-www-form-urlencoded" });
-    console.log(body)
     return this.http.post<SignUpResponse>('http://localhost:3000/author', body, { headers });
   }
 
@@ -30,7 +29,24 @@ export class AuthorService {
     body.set("password", password);
 
     let headers = new HttpHeaders({ "Content-Type": "application/x-www-form-urlencoded" });
-    console.log(body);
     return this.http.post<SignUpResponse>('http://localhost:3000/logIn', body, { headers });
   }
+
+  getUser(
+    userId: string | null,
+    session: string | null,
+  ) {
+    let url = 'http://localhost:3000/author';
+
+    let headers = new HttpHeaders();
+    if (session) {
+      url += '?getMyProfile=true'
+      headers = headers.set('session', session);
+    } else if (userId) {
+      url += `?userId=${userId}`;
+    }
+    return this.http.get<Author>(url, { headers });
+  }
 }
+
+
