@@ -1,7 +1,8 @@
 <div class="root">
 
     <div class="search-area">
-        <p-multiSelect [options]="categories" placeholder="Select categories" [filter]="false" [(ngModel)]="selectedCategories" optionLabel="name"></p-multiSelect>
+        <p-multiSelect [options]="categories" placeholder="Select categories" [filter]="false"
+            [(ngModel)]="selectedCategories" optionLabel="name"></p-multiSelect>
 
         <span class="p-input-icon-left">
             <i class="pi pi-search"></i>
@@ -12,7 +13,7 @@
 
     <div class="list">
         <div *ngFor="let recipe of recipes">
-            <app-feed-recipe [recipe]="recipe"></app-feed-recipe>
+            <app-feed-recipe [recipe]="recipe" [showEdit]="true"></app-feed-recipe>
         </div>
     </div>
 </div>

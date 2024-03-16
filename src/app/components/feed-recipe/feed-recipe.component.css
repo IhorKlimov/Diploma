@@ -2,19 +2,40 @@
     flex-direction: column;
     display: flex;
     width: 340px;
-    cursor: pointer;
     transition: 0.3s;
 }
 
-.feed-recipe:hover {
-    transform: translateY(-3px);
+.top {
+    flex-direction: column;
+    display: flex;
+    cursor: pointer;
 }
 
-.feed-recipe:hover h4 {
+.author {
+    cursor: pointer;
+}
+
+.author:hover {
+    font-weight: 500;
+}
+
+.top:hover h4 {
     text-decoration: underline;
 }
 
 img {
     height: 200px;
     object-fit: cover;
+}
+
+.bottom-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.bottom-row i {
+    font-size: 1rem;
+    color: blue;
+    cursor: pointer;
 }

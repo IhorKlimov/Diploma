@@ -1,5 +1,10 @@
-<div class="feed-recipe" routerLink="/recipe/{{recipe._id}}">
-    <img [src]="recipe.imageUrl" alt="">
-    <h4>{{recipe.title}}</h4>
-    <span>by {{recipe.author.userName}}</span>
+<div class="feed-recipe">
+    <div class="top" routerLink="/recipe/{{recipe._id}}">
+        <img [src]="recipe.imageUrl" alt="">
+        <h4>{{recipe.title}}</h4>
+    </div>
+    <div class="bottom-row">
+        <span>by <span class="author">{{recipe.author.userName}}</span></span>
+        <i *ngIf="showEdit" class="pi pi-pencil" routerLink="/edit-recipe" [queryParams]="{recipeId: recipe._id}"></i>
+    </div>
 </div>
