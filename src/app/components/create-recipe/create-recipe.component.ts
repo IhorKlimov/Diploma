@@ -12,17 +12,23 @@ import { AppStateService } from '../../services/app-state.service';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { RecipeService } from '../../services/recipe.service';
 import { FileStorageService } from '../../services/file-storage.service';
+import { ImageCroppedEvent, ImageCropperModule, base64ToFile } from 'ngx-image-cropper';
+import { DialogModule } from 'primeng/dialog';
 
 @Component({
   selector: 'app-create-recipe',
   standalone: true,
-  imports: [InputTextModule, ButtonModule, FormsModule, PasswordModule,
+  imports: [InputTextModule, ButtonModule, FormsModule, PasswordModule, ImageCropperModule, DialogModule,
     NgIf, ReactiveFormsModule, NgClass, JsonPipe, FileUploadModule, RouterLink, EditorModule,],
   templateUrl: './create-recipe.component.html',
   styleUrl: './create-recipe.component.css',
 })
 export class CreateRecipeComponent implements OnInit {
   form!: FormGroup;
+  showCropModal = false;
+  imageChangedEvent: any = '';
+  originalFile: File | null = null;
+  croppedImageBase64: any = '';
 
   constructor(
     private localStorageService: LocalStorageService,
@@ -34,23 +40,23 @@ export class CreateRecipeComponent implements OnInit {
 
   ngOnInit() {
     this.form = new FormGroup({
-      image: new FormControl<File | null>(null, [Validators.required]),
+      photo: new FormControl(null, []),
+      originalPhoto: new FormControl(null, []),
+      photoFile: new FormControl(null, [Validators.required]),
       title: new FormControl(null, [Validators.required]),
       text: new FormControl(null, [Validators.required]),
     }, {});
   }
 
-  onInitEditor(e: EditorInitEvent) {
-    // e.editor.focus();
-  }
-
   async onSubmit() {
     try {
-      const imageUploadingResult = await lastValueFrom(this.fileStorageService.uploadFile(this.form.get('image')?.value));
+      let photo = this.form.get('photoFile')?.value;
+      let fileUploadResult = await lastValueFrom(this.fileStorageService.uploadFile(photo));
+
       const response = await lastValueFrom(this.recipeService.createRecipe(
         this.form.get('title')?.value,
         this.form.get('text')?.value,
-        imageUploadingResult.imageUrl,
+        fileUploadResult.imageUrl,
       ));
 
       this.router.navigate([`recipe/${response.recipeId}`]);
@@ -65,11 +71,34 @@ export class CreateRecipeComponent implements OnInit {
     }
   }
 
-  onFileChange(event: Event) {
-    const target = (event.target as HTMLInputElement);
-    if (target.files != null) {
-      const file = target.files[0];
-      this.form.get('image')?.setValue(file);
-    }
+
+  fileChangeEvent(event: any): void {
+    this.showCropModal = true;
+    this.originalFile = event.currentTarget.files[0];
+    this.imageChangedEvent = event;
   }
+
+  onHideDialog() {
+    this.form.get('originalPhoto')?.setValue(null);
+  }
+
+  imageCropped(event: ImageCroppedEvent) {
+    this.croppedImageBase64 = event.base64;
+  }
+
+  cropImage() {
+    this.form.get('photo')?.setValue(this.croppedImageBase64);
+
+    const fileBlob = base64ToFile(this.croppedImageBase64);
+    const file: File = new File([fileBlob], this.originalFile!.name, { lastModified: this.originalFile!.lastModified, type: this.originalFile!.type });
+    this.form.get('photoFile')?.setValue(file);
+
+    this.showCropModal = false;
+  }
+
+  cancelPhoto() {
+    this.form.get('photo')?.setValue(null);
+    this.form.get('photoFile')?.setValue(null);
+  }
+
 }
