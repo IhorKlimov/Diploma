@@ -1,3 +1,37 @@
-<p>edit-profile works!</p>
+<div class="root">
+    <form class="content" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <h1>Edit profile</h1>
 
-<p>{{user?.userName}}</p>
+        <div class="photo-picker">
+            <label for="image-picker">
+                <img *ngIf="form.get('photo')?.value != null" [src]="form.get('photo')?.value">
+                <i *ngIf="form.get('photo')?.value == null" class="pi pi-camera"></i>
+            </label>
+            <input id="image-picker" type="file" (change)="fileChangeEvent($event)" accept="image/*"
+                formControlName="originalPhoto" />
+
+            <i *ngIf="form.get('photo')?.value != null" class="pi pi-times" (click)="cancelPhoto()"></i>
+        </div>
+
+        <p-dialog header="Crop your photo" [(visible)]="showCropModal" [modal]="true" [style]="{ width: '50rem' }"
+            [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" (onHide)="onHideDialog()">
+
+            <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1 / 1"
+                format="png" output="base64" (imageCropped)="imageCropped($event)"></image-cropper>
+
+            <ng-template pTemplate="footer">
+                <div class="spacer"></div>
+                <p-button icon="pi pi-check" (click)="cropImage()" label="Ok" pAutoFocus [autofocus]="true"></p-button>
+            </ng-template>
+        </p-dialog>
+
+        <div class="input-field">
+            <label for="username">User name</label>
+            <input id="username" type="text" name="username" pInputText id="username" formControlName="userName" />
+            <small class="p-error" *ngIf="!isFieldValid('userName')">User name is required</small>
+        </div>
+
+        <button type="button" pButton type="submit" [disabled]="!form.valid">Save changes</button>
+    </form>
+
+</div>

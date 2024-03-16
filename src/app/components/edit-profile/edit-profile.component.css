@@ -1,0 +1,94 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 50px;
+    row-gap: 10px;
+    width: 300px;
+}
+
+input {
+    width: 100%;
+}
+
+.p-password {
+    width: 100%;
+}
+
+.input-field label {
+    margin-left: 10px;
+}
+
+.input-field input {
+    margin-top: 5px;
+}
+
+button {
+    text-align: center;
+    margin: auto;
+    width: 100%;
+    margin-top: 10px;
+    display: block;
+}
+
+.space {
+    height: 50px;
+}
+
+.input-field {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.photo-picker {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.photo-picker label {
+    cursor: pointer;
+    background-color: hsla(0, 0%, 83%, 0.462);
+    width: 100px;
+    height: 100px;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+}
+
+.photo-picker i {
+    font-size: 2.5rem;
+    position: absolute;
+}
+
+.photo-picker img {
+    width: 100%;
+    border-radius: 50px;
+    position: absolute;
+    height: 100%;
+}
+
+.photo-picker input {
+    display: none;
+}
+
+.spacer {
+    height: 20px;
+}
+
+.photo-picker .pi-times {
+    font-size: 1rem;
+    cursor: pointer;
+    transform: translate(55px, -35px);
+}
