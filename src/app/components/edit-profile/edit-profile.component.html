@@ -13,7 +13,7 @@
             <i *ngIf="form.get('photo')?.value != null" class="pi pi-times" (click)="cancelPhoto()"></i>
         </div>
 
-        <p-dialog header="Crop your photo" [(visible)]="showCropModal" [modal]="true" [style]="{ width: '50rem' }"
+        <p-dialog header="Crop your photo" [(visible)]="showCropModal" [modal]="true" [style]="{ width: '35rem' }"
             [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" (onHide)="onHideDialog()">
 
             <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1 / 1"
@@ -33,5 +33,7 @@
 
         <button type="button" pButton type="submit" [disabled]="!form.valid">Save changes</button>
     </form>
+
+
 
 </div>
