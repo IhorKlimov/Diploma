@@ -9,8 +9,14 @@ import { RecipeCreationResponse } from '../interfaces/recipe-creation-response';
 export class RecipeService {
   constructor(private http: HttpClient) { }
 
-  getRecipe(id: string) {
-    return this.http.get<Recipe>(`http://localhost:3000/recipe?id=${id}`);
+  getRecipe(id: string, verifyAuthor: boolean = false) {
+    let url = `http://localhost:3000/recipe?id=${id}`;
+
+    if (verifyAuthor) {
+      url += 'verifyAuthor=true';
+    }
+
+    return this.http.get<Recipe>(url);
   }
 
   createRecipe(title: string, text: string, imageUrl: string) {
