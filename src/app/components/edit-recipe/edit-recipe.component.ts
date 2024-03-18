@@ -44,17 +44,18 @@ export class EditRecipeComponent implements OnInit {
 
   ngOnInit() {
     this.form = new FormGroup({
-      photo: new FormControl(null, []),
+      photo: new FormControl(null, [Validators.required]),
       originalPhoto: new FormControl(null, []),
-      photoFile: new FormControl(null, [Validators.required]),
+      photoFile: new FormControl(null, []),
       title: new FormControl(null, [Validators.required]),
       text: new FormControl(null, [Validators.required]),
     }, {});
-    this.recipeService.getRecipe(this.recipeId, true).subscribe({
-      next: (r) => { 
+    this.recipeService.getRecipe(this.recipeId, true, localStorage.getItem('session')).subscribe({
+      next: (r) => {
         this.form.get('title')?.setValue(r.title);
         this.form.get('text')?.setValue(r.description);
-        this.form.get('text')?.setValue(r.imageUrl);
+        this.form.get('photo')?.setValue(r.imageUrl);
+        console.log(r.description);
       },
       error: (e) => this.appStateService.setError(e.error),
     });
@@ -63,16 +64,22 @@ export class EditRecipeComponent implements OnInit {
   async onSubmit() {
     try {
       let photo = this.form.get('photoFile')?.value;
-      let fileUploadResult = await lastValueFrom(this.fileStorageService.uploadFile(photo));
-
-      const response = await lastValueFrom(this.recipeService.createRecipe(
+      if (photo != null) {
+        let fileUploadResult = await lastValueFrom(this.fileStorageService.uploadFile(photo));
+        photo = fileUploadResult.imageUrl;
+      } else {
+        photo = this.form.get('photo')?.value;
+      }
+      const response = await lastValueFrom(this.recipeService.updateRecipe(
+        this.recipeId,
         this.form.get('title')?.value,
         this.form.get('text')?.value,
-        fileUploadResult.imageUrl,
+        photo,
+        localStorage.getItem('session'),
       ));
 
-      this.router.navigate([`recipe/${response.recipeId}`]);
-      this.appStateService.setMessage('Created a new recipe');
+      console.log(this.form.get('text')?.value);
+      this.appStateService.setMessage('Updated recipe');
     } catch (error: any) {
       this.appStateService.setError(error.error);
 
