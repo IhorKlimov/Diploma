@@ -15,12 +15,15 @@ import { RecipeService } from '../../services/recipe.service';
 import { AppStateService } from '../../services/app-state.service';
 import { FileStorageService } from '../../services/file-storage.service';
 import { Recipe } from '../../interfaces/recipe';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-edit-recipe',
   standalone: true,
+  providers: [ConfirmationService,],
   imports: [InputTextModule, ButtonModule, FormsModule, PasswordModule, ImageCropperModule, DialogModule,
-    NgIf, ReactiveFormsModule, NgClass, JsonPipe, FileUploadModule, RouterLink, EditorModule,],
+    NgIf, ReactiveFormsModule, NgClass, JsonPipe, FileUploadModule, RouterLink, EditorModule, ConfirmDialogModule,],
   templateUrl: './edit-recipe.component.html',
   styleUrl: './edit-recipe.component.css'
 })
@@ -40,6 +43,7 @@ export class EditRecipeComponent implements OnInit {
     private recipeService: RecipeService,
     private appStateService: AppStateService,
     private fileStorageService: FileStorageService,
+    private confirmationService: ConfirmationService,
   ) { }
 
   ngOnInit() {
@@ -55,7 +59,6 @@ export class EditRecipeComponent implements OnInit {
         this.form.get('title')?.setValue(r.title);
         this.form.get('text')?.setValue(r.description);
         this.form.get('photo')?.setValue(r.imageUrl);
-        console.log(r.description);
       },
       error: (e) => this.appStateService.setError(e.error),
     });
@@ -78,7 +81,6 @@ export class EditRecipeComponent implements OnInit {
         localStorage.getItem('session'),
       ));
 
-      console.log(this.form.get('text')?.value);
       this.appStateService.setMessage('Updated recipe');
     } catch (error: any) {
       this.appStateService.setError(error.error);
@@ -117,5 +119,34 @@ export class EditRecipeComponent implements OnInit {
   cancelPhoto() {
     this.form.get('photo')?.setValue(null);
     this.form.get('photoFile')?.setValue(null);
+  }
+
+  deleteRecipe(event: Event) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Are you sure you want to delete this recipe?',
+      header: 'Delete Recipe',
+      icon: 'pi pi-info-circle',
+      acceptButtonStyleClass: "p-button-danger p-button-text",
+      rejectButtonStyleClass: "p-button-text p-button-text",
+      acceptIcon: "none",
+      rejectIcon: "none",
+
+      accept: async () => {
+        try {
+          const response = await lastValueFrom(this.recipeService.deleteRecipe(this.recipeId, localStorage.getItem('session')))
+          this.appStateService.setMessage('Recipe deleted');
+          this.router.navigate(['/my-recipes']);
+        } catch (error: any) {
+          this.appStateService.setError(error.error);
+
+          if (error.status == 401) {
+            this.localStorageService.setSession(null);
+            this.router.navigate(['/']);
+          }
+        }
+      },
+      reject: () => { }
+    });
   }
 }

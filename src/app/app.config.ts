@@ -9,7 +9,6 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes, withComponentInputBinding()),
     provideAnimations(),
-    provideAnimations(),
     importProvidersFrom(TimeagoModule.forRoot()),
     importProvidersFrom(HttpClientModule),
   ]

@@ -74,3 +74,7 @@ form {
     cursor: pointer;
     transform: translate(55px, -35px);
 }
+
+.buttons #delete {
+    margin-right: 20px;
+}

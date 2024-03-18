@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Recipe } from '../interfaces/recipe';
 import { RecipeCreationResponse } from '../interfaces/recipe-creation-response';
 import { UpdateRecipeResponse } from '../interfaces/update-recipe-response';
+import { DeleteRecipeResponse } from '../interfaces/delete-recipe-response';
 
 @Injectable({
   providedIn: 'root'
@@ -57,5 +58,23 @@ export class RecipeService {
     return this.http.put<UpdateRecipeResponse>(`http://localhost:3000/recipe`, body, {
       headers,
     });
+  }
+
+  deleteRecipe(recipeId: string, session: string | null) {
+    const body = new URLSearchParams();
+    body.set('recipeId', recipeId);
+
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+    });
+    if (session) {
+      headers = headers.set('session', session);
+    }
+
+    return this.http.delete<DeleteRecipeResponse>(`http://localhost:3000/recipe`, {
+      headers,
+      body,
+    },
+    );
   }
 }
