@@ -5,6 +5,10 @@
     </div>
     <div class="bottom-row">
         <span>by <span class="author">{{recipe.author.userName}}</span></span>
-        <i *ngIf="showEdit" class="pi pi-pencil" routerLink="/edit-recipe" [queryParams]="{recipeId: recipe._id}"></i>
+        <div>
+            <i *ngIf="showEdit" class="pi pi-pencil" routerLink="/edit-recipe"
+                [queryParams]="{recipeId: recipe._id}"></i>
+            <i [ngClass]="isFavorite ? 'pi pi-heart-fill' : 'pi pi-heart'" (click)="triggerFavorite()"></i>
+        </div>
     </div>
 </div>

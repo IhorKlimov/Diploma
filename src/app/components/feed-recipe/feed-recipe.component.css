@@ -39,3 +39,13 @@ img {
     color: blue;
     cursor: pointer;
 }
+
+.pi-heart {
+    margin-left: 20px;
+    color: red !important;
+}
+
+::ng-deep .pi-heart-fill {
+    margin-left: 20px;
+    color: red !important;
+}
