@@ -1,7 +1,7 @@
 .feed-recipe {
     flex-direction: column;
     display: flex;
-    width: 340px;
+    width: 285px;
     transition: 0.3s;
 }
 
@@ -24,7 +24,7 @@
 }
 
 img {
-    height: 200px;
+    aspect-ratio: 13 / 10;
     object-fit: cover;
 }
 
