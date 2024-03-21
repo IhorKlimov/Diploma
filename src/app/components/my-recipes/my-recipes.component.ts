@@ -7,6 +7,10 @@ import { NgFor } from '@angular/common';
 import { FeedService } from '../../services/feed.service';
 import { Category } from '../../interfaces/category';
 import { Recipe } from '../../interfaces/recipe';
+import { FavoriteRecipeService } from '../../services/favorite-recipe.service';
+import { LocalStorageService } from '../../services/local-storage.service';
+import { lastValueFrom } from 'rxjs';
+import { AppStateService } from '../../services/app-state.service';
 
 @Component({
   selector: 'app-my-recipes',
@@ -18,8 +22,15 @@ import { Recipe } from '../../interfaces/recipe';
 export class MyRecipesComponent {
   searchQuery: string | undefined;
   categories!: Category[];
+  recipes: Recipe[] = [];
+  favoriteRecipes: string[] = [];
 
-  constructor(private feedService: FeedService) { }
+  constructor(
+    private feedService: FeedService,
+    private storageService: LocalStorageService,
+    private appState: AppStateService,
+    private favoriteRecipeService: FavoriteRecipeService,
+  ) { }
 
   selectedCategories!: Category[];
 
@@ -43,7 +54,42 @@ export class MyRecipesComponent {
       },
     ];
     this.feedService.getRecipes(null, true).subscribe(data => this.recipes = data);
+    this.storageService.getSession.subscribe(value => {
+      this.fetchFavoriteRecipes(value);
+    });
+
+    this.fetchFavoriteRecipes(localStorage.getItem('session'));
   }
 
-  recipes: Recipe[] = []
+  fetchFavoriteRecipes(session?: string | null) {
+    if (session) {
+      this.favoriteRecipeService.getFavoriteRecipeIds(session).subscribe({
+        next: (d) => {
+          console.log(d);
+          this.favoriteRecipes = d;
+        }
+      });
+    }
+  }
+
+  async onFavoriteClicked(recipeId: string) {
+    if (this.favoriteRecipes.includes(recipeId)) {
+      const index = this.favoriteRecipes.indexOf(recipeId);
+      if (index > -1) {
+        this.favoriteRecipes.splice(index, 1);
+      }
+    } else {
+      this.favoriteRecipes.push(recipeId);
+    }
+    const session = localStorage.getItem('session');
+    if (session) {
+      try {
+        const result = await lastValueFrom(this.favoriteRecipeService.toggleFavoriteRecipe(recipeId, session));
+        console.log(result);
+      } catch (error: any) {
+        console.log(error);
+        this.appState.setError(error.error);
+      }
+    }
+  }
 }

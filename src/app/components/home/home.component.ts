@@ -26,8 +26,11 @@ export class HomeComponent {
   recipes: Recipe[] = [];
 
   constructor(
-    private feedService: FeedService, private favoriteRecipeService: FavoriteRecipeService,
-    private storageService: LocalStorageService, private appState: AppStateService,) { }
+    private feedService: FeedService,
+    private favoriteRecipeService: FavoriteRecipeService,
+    private storageService: LocalStorageService,
+    private appState: AppStateService,
+  ) { }
 
   selectedCategories!: Category[];
 

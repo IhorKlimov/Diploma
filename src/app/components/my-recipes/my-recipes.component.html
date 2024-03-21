@@ -13,7 +13,8 @@
 
     <div class="list">
         <div *ngFor="let recipe of recipes">
-            <app-feed-recipe [recipe]="recipe" [showEdit]="true"></app-feed-recipe>
+            <app-feed-recipe [recipe]="recipe" [showEdit]="true"
+                [isFavorite]="favoriteRecipes.includes(recipe._id)" (onFavoriteClicked)="onFavoriteClicked($event)"></app-feed-recipe>
         </div>
     </div>
 </div>
