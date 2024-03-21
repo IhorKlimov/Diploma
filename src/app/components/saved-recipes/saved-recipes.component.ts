@@ -8,6 +8,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { Recipe } from '../../interfaces/recipe';
 import { FavoriteRecipeService } from '../../services/favorite-recipe.service';
+import { LocalStorageService } from '../../services/local-storage.service';
+import { lastValueFrom } from 'rxjs';
+import { AppStateService } from '../../services/app-state.service';
 
 @Component({
   selector: 'app-saved-recipes',
@@ -19,9 +22,11 @@ import { FavoriteRecipeService } from '../../services/favorite-recipe.service';
 export class SavedRecipesComponent {
   searchQuery: string | undefined;
   categories!: Category[];
+  recipes: Recipe[] = [];
 
   constructor(
-    private feedService: FeedService,
+    private storageService: LocalStorageService,
+    private appState: AppStateService,
     private favoriteRecipesService: FavoriteRecipeService,
   ) { }
 
@@ -46,9 +51,41 @@ export class SavedRecipesComponent {
         name: "Deserts"
       },
     ];
-    // this.favoriteRecipesService.getFavoriteRecipeIds(null, true).subscribe(data => this.recipes = data);
+
+    this.storageService.getSession.subscribe(value => {
+      this.fetchFavoriteRecipes(value);
+    });
+
+    this.fetchFavoriteRecipes(localStorage.getItem('session'));
   }
 
-  recipes: Recipe[] = []
+
+  fetchFavoriteRecipes(session?: string | null) {
+    if (session) {
+      this.favoriteRecipesService.getFavoriteRecipes(session).subscribe({
+        next: (d) => {
+          console.log(d);
+          this.recipes = d;
+        }
+      });
+    }
+  }
+
+  async onFavoriteClicked(recipeId: string) {
+    const index = this.recipes.map(r => r._id).indexOf(recipeId);
+    if (index > -1) {
+      this.recipes.splice(index, 1);
+    }
+    const session = localStorage.getItem('session');
+    if (session) {
+      try {
+        const result = await lastValueFrom(this.favoriteRecipesService.toggleFavoriteRecipe(recipeId, session));
+        console.log(result);
+      } catch (error: any) {
+        console.log(error);
+        this.appState.setError(error.error);
+      }
+    }
+  }
 }
 
