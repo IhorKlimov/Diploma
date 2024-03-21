@@ -8,6 +8,7 @@ import { CreateRecipeComponent } from './components/create-recipe/create-recipe.
 import { MyRecipesComponent } from './components/my-recipes/my-recipes.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { EditRecipeComponent } from './components/edit-recipe/edit-recipe.component';
+import { SavedRecipesComponent } from './components/saved-recipes/saved-recipes.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -18,5 +19,6 @@ export const routes: Routes = [
     { path: 'my-recipes', component: MyRecipesComponent },
     { path: 'create-recipe', component: CreateRecipeComponent },
     { path: 'edit-recipe', component: EditRecipeComponent, },
+    { path: 'saved-recipes', component: SavedRecipesComponent, },
     { path: '**', component: PageNotFoundComponent }
 ];

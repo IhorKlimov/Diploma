@@ -9,8 +9,8 @@ export class FavoriteRecipeService {
 
   constructor(private http: HttpClient) { }
 
-  getFavoriteRecipes(session?: string) {
-    let url = 'http://localhost:3000/favorite-recipes';
+  getFavoriteRecipeIds(session?: string) {
+    let url = 'http://localhost:3000/favorite-recipe-ids';
 
     let headers = new HttpHeaders();
     if (session) {
@@ -20,7 +20,7 @@ export class FavoriteRecipeService {
   }
 
   getFavoriteRecipeStatus(recipeId: string, session?: string) {
-    let url = `http://localhost:3000/favorite-recipe?recipeId=${recipeId}`;
+    let url = `http://localhost:3000/favorite-recipe-status?recipeId=${recipeId}`;
 
     let headers = new HttpHeaders();
     if (session) {

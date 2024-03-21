@@ -1,0 +1,20 @@
+.root {
+    margin-left: 116px;
+    margin-right: 116px;
+    margin-top: 25px;
+}
+
+.search-area {
+    display: flex;
+    justify-content: end;
+    column-gap: 20px;
+}
+
+.list {
+    margin-top: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 25px;
+    row-gap: 50px;
+}

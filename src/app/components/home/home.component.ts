@@ -60,7 +60,7 @@ export class HomeComponent {
 
   fetchFavoriteRecipes(session?: string | null) {
     if (session) {
-      this.favoriteRecipeService.getFavoriteRecipes(session).subscribe({
+      this.favoriteRecipeService.getFavoriteRecipeIds(session).subscribe({
         next: (d) => {
           console.log(d);
           this.favoriteRecipes = d;
