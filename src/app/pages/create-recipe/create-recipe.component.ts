@@ -2,24 +2,25 @@ import { JsonPipe, NgClass, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { ImageCroppedEvent, ImageCropperModule, base64ToFile } from 'ngx-image-cropper';
 import { ButtonModule } from 'primeng/button';
-import { EditorInitEvent, EditorModule } from 'primeng/editor';
+import { DialogModule } from 'primeng/dialog';
+import { EditorModule } from 'primeng/editor';
 import { FileUploadModule } from 'primeng/fileupload';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { lastValueFrom } from 'rxjs';
 import { AppStateService } from '../../services/app-state.service';
+import { FileStorageService } from '../../services/file-storage.service';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { RecipeService } from '../../services/recipe.service';
-import { FileStorageService } from '../../services/file-storage.service';
-import { ImageCroppedEvent, ImageCropperModule, base64ToFile } from 'ngx-image-cropper';
-import { DialogModule } from 'primeng/dialog';
+import { CategorySelectorComponent } from '../../components/category-selector/category-selector.component';
 
 @Component({
   selector: 'app-create-recipe',
   standalone: true,
   imports: [InputTextModule, ButtonModule, FormsModule, PasswordModule, ImageCropperModule, DialogModule,
-    NgIf, ReactiveFormsModule, NgClass, JsonPipe, FileUploadModule, RouterLink, EditorModule,],
+    NgIf, ReactiveFormsModule, NgClass, JsonPipe, FileUploadModule, RouterLink, EditorModule, CategorySelectorComponent,],
   templateUrl: './create-recipe.component.html',
   styleUrl: './create-recipe.component.css',
 })

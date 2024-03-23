@@ -3,27 +3,28 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { ImageCroppedEvent, ImageCropperModule, base64ToFile } from 'ngx-image-cropper';
+import { ConfirmationService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
 import { EditorModule } from 'primeng/editor';
 import { FileUploadModule } from 'primeng/fileupload';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { lastValueFrom } from 'rxjs';
-import { LocalStorageService } from '../../services/local-storage.service';
-import { RecipeService } from '../../services/recipe.service';
+import { CategorySelectorComponent } from '../../components/category-selector/category-selector.component';
 import { AppStateService } from '../../services/app-state.service';
 import { FileStorageService } from '../../services/file-storage.service';
-import { Recipe } from '../../models/recipe';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ConfirmationService } from 'primeng/api';
+import { LocalStorageService } from '../../services/local-storage.service';
+import { RecipeService } from '../../services/recipe.service';
 
 @Component({
   selector: 'app-edit-recipe',
   standalone: true,
   providers: [ConfirmationService,],
   imports: [InputTextModule, ButtonModule, FormsModule, PasswordModule, ImageCropperModule, DialogModule,
-    NgIf, ReactiveFormsModule, NgClass, JsonPipe, FileUploadModule, RouterLink, EditorModule, ConfirmDialogModule,],
+    NgIf, ReactiveFormsModule, NgClass, JsonPipe, FileUploadModule, RouterLink, EditorModule, ConfirmDialogModule,
+    CategorySelectorComponent,],
   templateUrl: './edit-recipe.component.html',
   styleUrl: './edit-recipe.component.css'
 })
