@@ -11,6 +11,10 @@ a {
     align-items: center;
 }
 
+.app-title img {
+    border-radius: 50% 50% 50% 50% / 30% 30% 70% 70%;
+}
+
 .app-title:hover {
     text-decoration: none;
 }
@@ -29,7 +33,11 @@ a:hover {
 }
 
 .title {
-    font-weight: bold;
+    font-family: "Indie Flower", cursive;
+    font-weight: 400;
+    font-size: 1.75rem;
+    color: black;
+    font-style: normal;
 }
 
 mat-toolbar {
