@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FavoriteRecipeStatus } from '../interfaces/favorite-recipe-status';
-import { Recipe } from '../interfaces/recipe';
+import { FavoriteRecipeStatus } from '../models/favorite-recipe-status';
+import { Recipe } from '../models/recipe';
 
 @Injectable({
   providedIn: 'root'

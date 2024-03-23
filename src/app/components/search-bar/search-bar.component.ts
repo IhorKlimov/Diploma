@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { Category } from '../../interfaces/category';
+import { Category } from '../../models/category';
 import { AppStateService } from '../../services/app-state.service';
 import { CategoryService } from '../../services/category.service';
 import { FeedRecipeComponent } from '../feed-recipe/feed-recipe.component';

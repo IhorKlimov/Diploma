@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Recipe } from '../interfaces/recipe';
-import { RecipeCreationResponse } from '../interfaces/recipe-creation-response';
-import { UpdateRecipeResponse } from '../interfaces/update-recipe-response';
-import { DeleteRecipeResponse } from '../interfaces/delete-recipe-response';
+import { Recipe } from '../models/recipe';
+import { RecipeCreationResponse } from '../models/recipe-creation-response';
+import { UpdateRecipeResponse } from '../models/update-recipe-response';
+import { DeleteRecipeResponse } from '../models/delete-recipe-response';
 
 @Injectable({
   providedIn: 'root'

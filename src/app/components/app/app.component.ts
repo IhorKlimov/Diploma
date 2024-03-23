@@ -2,16 +2,16 @@ import { CommonModule, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { LocalStorageService } from '../../services/local-storage.service';
-import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-import { AppStateService } from '../../services/app-state.service';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
-import { Author } from '../../interfaces/author';
-import { AuthorService } from '../../services/author.service';
+import { ButtonModule } from 'primeng/button';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
-import { Button, ButtonModule } from 'primeng/button';
+import { ToastModule } from 'primeng/toast';
+import { Author } from '../../models/author';
+import { AppStateService } from '../../services/app-state.service';
+import { AuthorService } from '../../services/author.service';
+import { LocalStorageService } from '../../services/local-storage.service';
 
 @Component({
   selector: 'app-root',

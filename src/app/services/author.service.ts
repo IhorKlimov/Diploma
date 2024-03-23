@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Author } from '../interfaces/author';
-import { SignUpResponse } from '../interfaces/sign-up-response';
-import { AuthorUpdateResult } from '../interfaces/author-update-result';
+import { Author } from '../models/author';
+import { SignUpResponse } from '../models/sign-up-response';
+import { AuthorUpdateResult } from '../models/author-update-result';
 
 @Injectable({
   providedIn: 'root'

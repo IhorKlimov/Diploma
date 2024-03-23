@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { TimeagoModule } from 'ngx-timeago';
 import { AvatarModule } from 'primeng/avatar';
 import { RatingModule } from 'primeng/rating';
-import { Review } from '../../interfaces/review';
+import { Review } from '../../models/review';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 

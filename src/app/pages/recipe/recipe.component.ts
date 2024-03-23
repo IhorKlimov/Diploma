@@ -1,14 +1,14 @@
 import { Component, Input } from '@angular/core';
-import { Recipe } from '../../interfaces/recipe';
+import { Recipe } from '../../models/recipe';
 import { RatingModule } from 'primeng/rating';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DatePipe, NgFor } from '@angular/common';
-import { ReviewComponent } from '../review/review.component';
-import { Review } from '../../interfaces/review';
+import { ReviewComponent } from '../../components/review/review.component';
+import { Review } from '../../models/review';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { AvatarModule } from 'primeng/avatar';
-import { Author } from '../../interfaces/author';
+import { Author } from '../../models/author';
 import { RecipeService } from '../../services/recipe.service';
 import { ReviewService } from '../../services/review.service';
 import { AppStateService } from '../../services/app-state.service';

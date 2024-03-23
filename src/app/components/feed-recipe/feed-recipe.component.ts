@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Recipe } from '../../interfaces/recipe';
+import { Recipe } from '../../models/recipe';
 import { RouterLink } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { NgClass, NgIf } from '@angular/common';

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Review } from '../interfaces/review';
-import { ReviewCreationResponse } from '../interfaces/review-creation-response';
+import { Review } from '../models/review';
+import { ReviewCreationResponse } from '../models/review-creation-response';
 
 @Injectable({
   providedIn: 'root'

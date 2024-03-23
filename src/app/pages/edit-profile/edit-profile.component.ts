@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthorService } from '../../services/author.service';
-import { Author } from '../../interfaces/author';
+import { Author } from '../../models/author';
 import { AppStateService } from '../../services/app-state.service';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';

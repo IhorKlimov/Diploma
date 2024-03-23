@@ -4,13 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { lastValueFrom } from 'rxjs';
-import { Recipe } from '../../interfaces/recipe';
+import { Recipe } from '../../models/recipe';
 import { AppStateService } from '../../services/app-state.service';
 import { FavoriteRecipeService } from '../../services/favorite-recipe.service';
 import { FeedService } from '../../services/feed.service';
 import { LocalStorageService } from '../../services/local-storage.service';
-import { FeedRecipeComponent } from '../feed-recipe/feed-recipe.component';
-import { SearchBarComponent } from '../search-bar/search-bar.component';
+import { FeedRecipeComponent } from '../../components/feed-recipe/feed-recipe.component';
+import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
 
 @Component({
   selector: 'app-home',

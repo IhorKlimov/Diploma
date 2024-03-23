@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FileStorageResult } from '../interfaces/file-storage-result';
+import { FileStorageResult } from '../models/file-storage-result';
 
 @Injectable({
   providedIn: 'root'
