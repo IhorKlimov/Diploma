@@ -1,10 +1,11 @@
 <div class="root">
     <div class="left">
-        <p-avatar [image]="review.author.imageUrl" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
+        <p-avatar [image]="review.user.imageUrl" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
     </div>
     <div class="right">
-        <span>{{review.author.userName}}</span>
+        <span>{{review.user.userName}}</span>
         <span class="time">{{review.timestamp | timeago}}</span>
-        <p class="review">{{review.text}}</p>
+        <p-rating *ngIf="review.stars" [readonly]="true" [(ngModel)]="review.stars" [cancel]="false"></p-rating>
+        <div class="review">{{review.text}}</div>
     </div>
 </div>

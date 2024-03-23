@@ -8,8 +8,14 @@
 .right {
     flex-direction: column;
     display: flex;
+    row-gap: 5px;
 }
+
+p-rating {}
 
 .time {
     font-size: 12px;
+    margin-bottom: 15px;
 }
+
+.review {}

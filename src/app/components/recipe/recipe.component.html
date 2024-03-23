@@ -12,18 +12,19 @@
     <h3>Reviews</h3>
 
 
-    <div class="add-review">
+    <form class="add-review" [formGroup]="form" (ngSubmit)="addComment()">
         <p>
             <span>Rate and comment</span>
-            <p-rating [(ngModel)]="selectedRating" [cancel]="false"></p-rating>
+            <p-rating formControlName="stars" [cancel]="false"></p-rating>
         </p>
         <div class="input">
-            <p-avatar [image]="currentUser.imageUrl" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
-            <input type="text" pInputText [(ngModel)]="reviewText" />
-            <p-button label="Comment"></p-button>
+            <div class="row">
+                <p-avatar [image]="currentUser?.imageUrl" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
+                <textarea [autoResize]="true" pInputTextarea formControlName="text"></textarea>
+            </div>
+            <button type="button" pButton type="submit" [disabled]="!form.valid">Comment</button>
         </div>
-    </div>
+    </form>
 
     <app-review *ngFor="let review of reviews" [review]="review" />
-
 </div>

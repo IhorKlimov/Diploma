@@ -15,7 +15,7 @@ export class ReviewService {
     return this.http.get<Array<Review>>(url);
   }
 
-  createReview(recipeId: string, text: string, stars?: number, session?: string) {
+  createReview(recipeId: string, text: string, stars?: number, session?: string | null) {
     const body = new URLSearchParams();
     body.set('text', text);
     body.set('recipeId', recipeId);

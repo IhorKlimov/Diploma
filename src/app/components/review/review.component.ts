@@ -1,12 +1,15 @@
 import { Component, Input } from '@angular/core';
-import { Review } from '../../interfaces/review';
-import { AvatarModule } from 'primeng/avatar';
 import { TimeagoModule } from 'ngx-timeago';
+import { AvatarModule } from 'primeng/avatar';
+import { RatingModule } from 'primeng/rating';
+import { Review } from '../../interfaces/review';
+import { FormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-review',
   standalone: true,
-  imports: [AvatarModule, TimeagoModule],
+  imports: [AvatarModule, TimeagoModule, RatingModule, FormsModule, NgIf,],
   templateUrl: './review.component.html',
   styleUrl: './review.component.css'
 })
