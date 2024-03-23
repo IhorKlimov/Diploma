@@ -1,21 +1,22 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { FeedRecipeComponent } from '../feed-recipe/feed-recipe.component';
-import { NgFor } from '@angular/common';
-import { FeedService } from '../../services/feed.service';
+import { lastValueFrom } from 'rxjs';
 import { Category } from '../../interfaces/category';
 import { Recipe } from '../../interfaces/recipe';
-import { FavoriteRecipeService } from '../../services/favorite-recipe.service';
-import { LocalStorageService } from '../../services/local-storage.service';
-import { lastValueFrom } from 'rxjs';
 import { AppStateService } from '../../services/app-state.service';
+import { FavoriteRecipeService } from '../../services/favorite-recipe.service';
+import { FeedService } from '../../services/feed.service';
+import { LocalStorageService } from '../../services/local-storage.service';
+import { FeedRecipeComponent } from '../feed-recipe/feed-recipe.component';
+import { SearchBarComponent } from '../search-bar/search-bar.component';
 
 @Component({
   selector: 'app-my-recipes',
   standalone: true,
-  imports: [NgFor, FeedRecipeComponent, FormsModule, InputTextModule, MultiSelectModule],
+  imports: [NgFor, FeedRecipeComponent, FormsModule, InputTextModule, MultiSelectModule, SearchBarComponent,],
   templateUrl: './my-recipes.component.html',
   styleUrl: './my-recipes.component.css'
 })
@@ -35,24 +36,6 @@ export class MyRecipesComponent {
   selectedCategories!: Category[];
 
   ngOnInit() {
-    this.categories = [
-      {
-        id: 1,
-        name: "Appetizers"
-      },
-      {
-        id: 2,
-        name: "Salads"
-      },
-      {
-        id: 3,
-        name: "Main course"
-      },
-      {
-        id: 4,
-        name: "Deserts"
-      },
-    ];
     this.feedService.getRecipes(null, true).subscribe(data => this.recipes = data);
     this.storageService.getSession.subscribe(value => {
       this.fetchFavoriteRecipes(value);

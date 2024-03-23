@@ -36,8 +36,9 @@ a:hover {
     font-family: "Indie Flower", cursive;
     font-weight: 400;
     font-size: 1.75rem;
-    color: black;
+    color: #264653; 
     font-style: normal;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 mat-toolbar {

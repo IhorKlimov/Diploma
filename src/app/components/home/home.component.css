@@ -5,12 +5,6 @@
     padding-bottom: 25px;
 }
 
-.search-area {
-    display: flex;
-    justify-content: end;
-    column-gap: 20px;
-}
-
 .list {
     margin-top: 25px;
     display: flex;

@@ -1,14 +1,5 @@
 <div class="root">
-
-    <div class="search-area">
-        <p-multiSelect [options]="categories" placeholder="Select categories" [filter]="false"
-            [(ngModel)]="selectedCategories" optionLabel="name"></p-multiSelect>
-
-        <span class="p-input-icon-left">
-            <i class="pi pi-search"></i>
-            <input type="text" pInputText placeholder="Enter name" [(ngModel)]="searchQuery" />
-        </span>
-    </div>
+    <app-search-bar></app-search-bar>
 
     <div class="list">
         <div *ngFor="let recipe of recipes">
