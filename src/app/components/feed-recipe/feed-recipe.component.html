@@ -1,7 +1,17 @@
 <div class="feed-recipe">
     <div class="top" routerLink="/recipe/{{recipe._id}}">
         <img [src]="recipe.imageUrl" alt="">
-        <h4>{{recipe.title}}</h4>
+        
+        <div class="name">{{recipe.title}}</div>
+
+
+        <bar-rating *ngIf="recipe.rating" [rate]="recipe.rating" [max]="5" [readOnly]="true">
+            <fa-icon *ratingInactive [icon]="['far', 'star']" [fixedWidth]="true" size="sm"
+                style="color: #d2d2d2"></fa-icon>
+            <fa-icon *ratingActive [icon]="['fas', 'star']" [fixedWidth]="true" size="sm" style="color: gold"></fa-icon>
+            <fa-icon *ratingFraction [icon]="['fas', 'star-half-alt']" [fixedWidth]="true" size="sm"
+                style="color: gold"></fa-icon>
+        </bar-rating>
     </div>
     <div class="bottom-row">
         <span>by <span class="author">{{recipe.author.userName}}</span></span>

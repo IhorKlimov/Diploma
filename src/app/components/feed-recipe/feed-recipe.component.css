@@ -11,6 +11,12 @@
     cursor: pointer;
 }
 
+.name {
+    font-weight: 500;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
 .author {
     cursor: pointer;
 }
@@ -30,6 +36,7 @@ img {
 
 .bottom-row {
     display: flex;
+    margin-top: 10px;
     align-items: center;
     justify-content: space-between;
 }
@@ -48,4 +55,8 @@ img {
 ::ng-deep .pi-heart-fill {
     margin-left: 20px;
     color: red !important;
+}
+
+.p-rating-star {
+    color: gold;
 }
