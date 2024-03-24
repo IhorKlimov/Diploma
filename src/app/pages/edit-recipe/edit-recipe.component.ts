@@ -17,6 +17,7 @@ import { AppStateService } from '../../services/app-state.service';
 import { FileStorageService } from '../../services/file-storage.service';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { RecipeService } from '../../services/recipe.service';
+import { Category } from '../../models/category';
 
 @Component({
   selector: 'app-edit-recipe',
@@ -52,7 +53,7 @@ export class EditRecipeComponent implements OnInit {
       photo: new FormControl(null, [Validators.required]),
       originalPhoto: new FormControl(null, []),
       photoFile: new FormControl(null, []),
-      selectedCategories: new FormControl(null, []),
+      selectedCategories: new FormControl([], [Validators.required]),
       title: new FormControl(null, [Validators.required]),
       text: new FormControl(null, [Validators.required]),
     }, {});
@@ -61,12 +62,15 @@ export class EditRecipeComponent implements OnInit {
         this.form.get('title')?.setValue(r.title);
         this.form.get('text')?.setValue(r.description);
         this.form.get('photo')?.setValue(r.imageUrl);
+        this.form.get('selectedCategories')?.setValue(r.categories);
       },
       error: (e) => this.appStateService.setError(e.error),
     });
   }
 
   async onSubmit() {
+    const categories = this.form.get('selectedCategories')?.value as Category[];
+
     try {
       let photo = this.form.get('photoFile')?.value;
       if (photo != null) {
@@ -80,6 +84,7 @@ export class EditRecipeComponent implements OnInit {
         this.form.get('title')?.value,
         this.form.get('text')?.value,
         photo,
+        categories.map((e) => e._id),
         localStorage.getItem('session'),
       ));
 

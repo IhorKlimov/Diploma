@@ -15,6 +15,7 @@ import { FileStorageService } from '../../services/file-storage.service';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { RecipeService } from '../../services/recipe.service';
 import { CategorySelectorComponent } from '../../components/category-selector/category-selector.component';
+import { Category } from '../../models/category';
 
 @Component({
   selector: 'app-create-recipe',
@@ -44,6 +45,7 @@ export class CreateRecipeComponent implements OnInit {
       photo: new FormControl(null, []),
       originalPhoto: new FormControl(null, []),
       photoFile: new FormControl(null, [Validators.required]),
+      selectedCategories: new FormControl([], [Validators.required]),
       title: new FormControl(null, [Validators.required]),
       text: new FormControl(null, [Validators.required]),
     }, {});
@@ -51,6 +53,7 @@ export class CreateRecipeComponent implements OnInit {
 
   async onSubmit() {
     try {
+      const categories = this.form.get('selectedCategories')?.value as Category[];
       let photo = this.form.get('photoFile')?.value;
       let fileUploadResult = await lastValueFrom(this.fileStorageService.uploadFile(photo));
 
@@ -58,6 +61,7 @@ export class CreateRecipeComponent implements OnInit {
         this.form.get('title')?.value,
         this.form.get('text')?.value,
         fileUploadResult.imageUrl,
+        categories.map((e) => e._id),
       ));
 
       this.router.navigate([`recipe/${response.recipeId}`]);
