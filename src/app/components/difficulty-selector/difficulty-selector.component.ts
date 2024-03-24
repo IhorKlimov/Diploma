@@ -4,18 +4,19 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { Difficulty } from '../../models/difficulty';
 import { AppStateService } from '../../services/app-state.service';
 import { DifficultyService } from '../../services/difficulty.service';
+import { DropdownModule } from 'primeng/dropdown';
 
 @Component({
   selector: 'app-difficulty-selector',
   standalone: true,
-  imports: [FormsModule, MultiSelectModule, ReactiveFormsModule,],
+  imports: [FormsModule, MultiSelectModule, ReactiveFormsModule, DropdownModule,],
   templateUrl: './difficulty-selector.component.html',
   styleUrl: './difficulty-selector.component.css'
 })
 export class DifficultySelectorComponent {
-  selectedDifficulties!: FormControl;
-  @Input('selectedDifficulties') set _selectedDifficulties(value: any) {
-    this.selectedDifficulties = value as FormControl;
+  selectedDifficulty!: FormControl;
+  @Input('selectedDifficulty') set _selectedDifficulty(value: any) {
+    this.selectedDifficulty = value as FormControl;
   }
   difficulties!: Difficulty[];
 

@@ -16,12 +16,15 @@ import { LocalStorageService } from '../../services/local-storage.service';
 import { RecipeService } from '../../services/recipe.service';
 import { CategorySelectorComponent } from '../../components/category-selector/category-selector.component';
 import { Category } from '../../models/category';
+import { DifficultySelectorComponent } from '../../components/difficulty-selector/difficulty-selector.component';
+import { Difficulty } from '../../models/difficulty';
 
 @Component({
   selector: 'app-create-recipe',
   standalone: true,
   imports: [InputTextModule, ButtonModule, FormsModule, PasswordModule, ImageCropperModule, DialogModule,
-    NgIf, ReactiveFormsModule, NgClass, JsonPipe, FileUploadModule, RouterLink, EditorModule, CategorySelectorComponent,],
+    NgIf, ReactiveFormsModule, NgClass, JsonPipe, FileUploadModule, RouterLink, EditorModule, CategorySelectorComponent,
+    DifficultySelectorComponent,],
   templateUrl: './create-recipe.component.html',
   styleUrl: './create-recipe.component.css',
 })
@@ -46,6 +49,7 @@ export class CreateRecipeComponent implements OnInit {
       originalPhoto: new FormControl(null, []),
       photoFile: new FormControl(null, [Validators.required]),
       selectedCategories: new FormControl([], [Validators.required]),
+      selectedDifficulty: new FormControl(null, [Validators.required]),
       title: new FormControl(null, [Validators.required]),
       text: new FormControl(null, [Validators.required]),
     }, {});
@@ -54,6 +58,7 @@ export class CreateRecipeComponent implements OnInit {
   async onSubmit() {
     try {
       const categories = this.form.get('selectedCategories')?.value as Category[];
+      const difficulty = this.form.get('selectedDifficulty')?.value as Difficulty;
       let photo = this.form.get('photoFile')?.value;
       let fileUploadResult = await lastValueFrom(this.fileStorageService.uploadFile(photo));
 
@@ -62,6 +67,7 @@ export class CreateRecipeComponent implements OnInit {
         this.form.get('text')?.value,
         fileUploadResult.imageUrl,
         categories.map((e) => e._id),
+        difficulty._id,
       ));
 
       this.router.navigate([`recipe/${response.recipeId}`]);

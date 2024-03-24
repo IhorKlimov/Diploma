@@ -57,8 +57,14 @@ export class RecipeService {
     return this.http.get<Recipe>(url, { headers });
   }
 
-  createRecipe(title: string, text: string, imageUrl: string, categories: Array<string>) {
-    const body: any = { title, text, imageUrl, categories, };
+  createRecipe(
+    title: string,
+    text: string,
+    imageUrl: string,
+    categories: Array<string>,
+    difficulty: string,
+  ) {
+    const body = { title, text, imageUrl, categories, difficulty, };
 
     const headers = new HttpHeaders({
       'session': localStorage.getItem('session')!,
@@ -70,8 +76,16 @@ export class RecipeService {
     });
   }
 
-  updateRecipe(recipeId: string, title: string, text: string, imageUrl: string, categories: Array<string>, session?: string | null) {
-    const body: any = { title, text, imageUrl, recipeId, categories, };
+  updateRecipe(
+    recipeId: string,
+    title: string,
+    text: string,
+    imageUrl: string,
+    categories: Array<string>,
+    difficulty: string,
+    session?: string | null
+  ) {
+    const body = { title, text, imageUrl, recipeId, categories, difficulty, };
 
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',

@@ -30,8 +30,12 @@
             </span>
         </div>
 
-        <div class="categories">
+        <div class="input-field">
             <app-category-selector [selectedCategories]="form.get('selectedCategories')"></app-category-selector>
+        </div>
+
+        <div class="input-field">
+            <app-difficulty-selector [selectedDifficulty]="form.get('selectedDifficulty')"></app-difficulty-selector>
         </div>
 
         <div class="card">

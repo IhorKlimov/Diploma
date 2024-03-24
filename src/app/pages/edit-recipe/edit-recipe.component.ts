@@ -18,6 +18,8 @@ import { FileStorageService } from '../../services/file-storage.service';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { RecipeService } from '../../services/recipe.service';
 import { Category } from '../../models/category';
+import { DifficultySelectorComponent } from '../../components/difficulty-selector/difficulty-selector.component';
+import { Difficulty } from '../../models/difficulty';
 
 @Component({
   selector: 'app-edit-recipe',
@@ -25,7 +27,7 @@ import { Category } from '../../models/category';
   providers: [ConfirmationService,],
   imports: [InputTextModule, ButtonModule, FormsModule, PasswordModule, ImageCropperModule, DialogModule,
     NgIf, ReactiveFormsModule, NgClass, JsonPipe, FileUploadModule, RouterLink, EditorModule, ConfirmDialogModule,
-    CategorySelectorComponent,],
+    CategorySelectorComponent, DifficultySelectorComponent,],
   templateUrl: './edit-recipe.component.html',
   styleUrl: './edit-recipe.component.css'
 })
@@ -54,6 +56,7 @@ export class EditRecipeComponent implements OnInit {
       originalPhoto: new FormControl(null, []),
       photoFile: new FormControl(null, []),
       selectedCategories: new FormControl([], [Validators.required]),
+      selectedDifficulty: new FormControl(null, [Validators.required]),
       title: new FormControl(null, [Validators.required]),
       text: new FormControl(null, [Validators.required]),
     }, {});
@@ -63,6 +66,7 @@ export class EditRecipeComponent implements OnInit {
         this.form.get('text')?.setValue(r.description);
         this.form.get('photo')?.setValue(r.imageUrl);
         this.form.get('selectedCategories')?.setValue(r.categories);
+        this.form.get('selectedDifficulty')?.setValue(r.difficulty);
       },
       error: (e) => this.appStateService.setError(e.error),
     });
@@ -70,6 +74,7 @@ export class EditRecipeComponent implements OnInit {
 
   async onSubmit() {
     const categories = this.form.get('selectedCategories')?.value as Category[];
+    const difficulty = this.form.get('selectedDifficulty')?.value as Difficulty;
 
     try {
       let photo = this.form.get('photoFile')?.value;
@@ -85,6 +90,7 @@ export class EditRecipeComponent implements OnInit {
         this.form.get('text')?.value,
         photo,
         categories.map((e) => e._id),
+        difficulty._id,
         localStorage.getItem('session'),
       ));
 
