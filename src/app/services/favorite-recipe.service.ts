@@ -41,11 +41,10 @@ export class FavoriteRecipeService {
   }
 
   toggleFavoriteRecipe(recipeId: string, session?: string) {
-    const body = new URLSearchParams();
-    body.set('recipeId', recipeId);
+    const body: any = { recipeId, };
 
     let headers = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',
     });
     if (session) {
       headers = headers.set('session', session);

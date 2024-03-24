@@ -26,14 +26,11 @@ export class RecipeService {
   }
 
   createRecipe(title: string, text: string, imageUrl: string) {
-    const body = new URLSearchParams();
-    body.set('title', title);
-    body.set('text', text);
-    body.set('imageUrl', imageUrl);
+    const body: any = { title, text, imageUrl, };
 
     const headers = new HttpHeaders({
       'session': localStorage.getItem('session')!,
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',
     });
 
     return this.http.post<RecipeCreationResponse>(`http://localhost:3000/recipe`, body, {
@@ -41,15 +38,11 @@ export class RecipeService {
     });
   }
 
-  updateRecipe(recipeId: string, title: string, text: string, imageUrl: string,  session?: string | null) {
-    const body = new URLSearchParams();
-    body.set('title', title);
-    body.set('text', text);
-    body.set('imageUrl', imageUrl);
-    body.set('recipeId', recipeId);
+  updateRecipe(recipeId: string, title: string, text: string, imageUrl: string, session?: string | null) {
+    const body: any = { title, text, imageUrl, recipeId, };
 
     let headers = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',
     });
     if (session) {
       headers = headers.set('session', session);
@@ -61,11 +54,10 @@ export class RecipeService {
   }
 
   deleteRecipe(recipeId: string, session: string | null) {
-    const body = new URLSearchParams();
-    body.set('recipeId', recipeId);
+    const body: any = { recipeId, };
 
     let headers = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',
     });
     if (session) {
       headers = headers.set('session', session);

@@ -16,16 +16,14 @@ export class ReviewService {
   }
 
   createReview(recipeId: string, text: string, stars?: number, session?: string | null) {
-    const body = new URLSearchParams();
-    body.set('text', text);
-    body.set('recipeId', recipeId);
+    const body: any = { text, recipeId };
     if (stars) {
-      body.set('stars', stars.toString());
+      body.stars = stars;
     }
 
     const headers = new HttpHeaders({
       'session': session ?? '',
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',
     });
 
     return this.http.post<ReviewCreationResponse>(`http://localhost:3000/review`, body, {

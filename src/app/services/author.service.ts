@@ -12,24 +12,18 @@ export class AuthorService {
   constructor(private http: HttpClient) { }
 
   createAuthor(userName: string, email: string, password: string, imageUrl: string) {
-    let body = new URLSearchParams();
-    body.set('userName', userName);
-    body.set('email', email);
-    body.set('password', password);
+    let body: any = { userName, email, password, };
     if (imageUrl) {
-      body.set('imageUrl', imageUrl);
+      body.imageUrl = imageUrl;
     }
 
-    let headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post<SignUpResponse>('http://localhost:3000/author', body, { headers });
   }
 
   logIn(email: string, password: string) {
-    let body = new URLSearchParams();
-    body.set('email', email);
-    body.set('password', password);
-
-    let headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    let body: any = { email, password, };
+    let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post<SignUpResponse>('http://localhost:3000/logIn', body, { headers });
   }
 
@@ -51,13 +45,10 @@ export class AuthorService {
 
     let headers = new HttpHeaders({
       'session': session,
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',
     });
 
-    let body = new URLSearchParams();
-    body.set('userName', userName);
-    body.set('imageUrl', imageUrl);
-
+    let body: any = { userName, imageUrl, };
     return this.http.put<AuthorUpdateResult>(url, body, { headers });
   }
 }
