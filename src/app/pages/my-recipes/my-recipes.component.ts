@@ -4,14 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { lastValueFrom } from 'rxjs';
+import { FeedRecipeComponent } from '../../components/feed-recipe/feed-recipe.component';
+import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
 import { Category } from '../../models/category';
 import { Recipe } from '../../models/recipe';
 import { AppStateService } from '../../services/app-state.service';
 import { FavoriteRecipeService } from '../../services/favorite-recipe.service';
-import { FeedService } from '../../services/feed.service';
 import { LocalStorageService } from '../../services/local-storage.service';
-import { FeedRecipeComponent } from '../../components/feed-recipe/feed-recipe.component';
-import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
+import { RecipeService } from '../../services/recipe.service';
 
 @Component({
   selector: 'app-my-recipes',
@@ -27,7 +27,7 @@ export class MyRecipesComponent {
   favoriteRecipes: string[] = [];
 
   constructor(
-    private feedService: FeedService,
+    private recipeService: RecipeService,
     private storageService: LocalStorageService,
     private appState: AppStateService,
     private favoriteRecipeService: FavoriteRecipeService,
@@ -36,7 +36,7 @@ export class MyRecipesComponent {
   selectedCategories!: Category[];
 
   ngOnInit() {
-    this.feedService.getRecipes(null, true).subscribe(data => this.recipes = data);
+    this.recipeService.getRecipes(null, true).subscribe(data => this.recipes = data);
     this.storageService.getSession.subscribe(value => {
       this.fetchFavoriteRecipes(value);
     });

@@ -11,6 +11,24 @@ import { DeleteRecipeResponse } from '../models/delete-recipe-response';
 export class RecipeService {
   constructor(private http: HttpClient) { }
 
+  getRecipes(userId: string | null, showMyRecipes: boolean, query?: string,) {
+    let url = 'http://localhost:3000/recipes';
+    let headers: HttpHeaders | undefined = undefined;
+
+    if (userId) {
+      url += `userId=${userId}`;
+    } else if (showMyRecipes) {
+      url += '?showMyRecipes=true';
+      headers = new HttpHeaders({
+        'session': localStorage.getItem('session')!,
+      });
+    }
+
+    console.log(headers)
+
+    return this.http.get<Array<Recipe>>(url, { headers });
+  }
+
   getRecipe(id: string, verifyAuthor: boolean = false, session?: string | null,) {
     let url = `http://localhost:3000/recipe?id=${id}`;
     let headers = new HttpHeaders();
