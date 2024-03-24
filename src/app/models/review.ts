@@ -5,5 +5,6 @@ export interface Review {
     user: Author,
     text: string,
     stars: number,
-    timestamp: number
+    updatedTimestamp: number,
+    createdTimestamp: number,
 }

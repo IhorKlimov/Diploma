@@ -4,7 +4,7 @@
     </div>
     <div class="right">
         <span>{{review.user.userName}}</span>
-        <span class="time">{{review.timestamp | timeago}}</span>
+        <span class="time">{{review.createdTimestamp | timeago}}</span>
         <p-rating *ngIf="review.stars" [readonly]="true" [(ngModel)]="review.stars" [cancel]="false"></p-rating>
         <div class="review">{{review.text}}</div>
     </div>
