@@ -1,8 +1,10 @@
-<div class="search-area">
-    <app-category-selector></app-category-selector>
+<form [formGroup]="form">
+    <div class="search-area">
+        <app-category-selector [selectedCategories]="form.get('selectedCategories')"></app-category-selector>
 
-    <span class="p-input-icon-left">
-        <i class="pi pi-search"></i>
-        <input type="text" pInputText placeholder="Enter name" [(ngModel)]="searchQuery" />
-    </span>
-</div>
+        <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input type="text" pInputText placeholder="Enter name" formControlName="query" />
+        </span>
+    </div>
+</form>

@@ -13,17 +13,10 @@ import { RippleModule } from 'primeng/ripple';
   styleUrl: './feed-recipe.component.css'
 })
 export class FeedRecipeComponent {
-  @Input()
-  recipe!: Recipe;
-
-  @Input()
-  showEdit: boolean = false;
-
-  @Input()
-  isFavorite: boolean = false;
-
-  @Output()
-  onFavoriteClicked = new EventEmitter<string>();
+  @Input() recipe!: Recipe;
+  @Input() showEdit: boolean = false;
+  @Input() isFavorite: boolean = false;
+  @Output() onFavoriteClicked = new EventEmitter<string>();
 
   triggerFavorite() {
     this.onFavoriteClicked.emit(this.recipe._id);

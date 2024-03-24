@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Recipe } from '../models/recipe';
 import { RecipeCreationResponse } from '../models/recipe-creation-response';
 import { UpdateRecipeResponse } from '../models/update-recipe-response';
 import { DeleteRecipeResponse } from '../models/delete-recipe-response';
+import { SearchQuery } from '../models/search-query';
 
 @Injectable({
   providedIn: 'root'
@@ -11,20 +12,32 @@ import { DeleteRecipeResponse } from '../models/delete-recipe-response';
 export class RecipeService {
   constructor(private http: HttpClient) { }
 
-  getRecipes(userId: string | null, showMyRecipes: boolean, query?: string,) {
+  getRecipes(userId: string | null, showMyRecipes: boolean, query?: SearchQuery,) {
     let url = 'http://localhost:3000/recipes';
     let headers: HttpHeaders | undefined = undefined;
+    let params = new HttpParams();
 
     if (userId) {
-      url += `userId=${userId}`;
+      params = params.append("userId", userId);
     } else if (showMyRecipes) {
-      url += '?showMyRecipes=true';
+      params = params.append("showMyRecipes", true);
       headers = new HttpHeaders({
         'session': localStorage.getItem('session')!,
       });
     }
+    console.log(query);
 
-    console.log(headers)
+    if (query) {
+      if (query.query) {
+        params = params.append("query", query.query);
+      }
+      if (query.selectedCategories) {
+        params = params.append("categories", query.selectedCategories!.toString());
+      }
+    }
+
+    url += `?${params.toString()}`;
+    console.log(url, params.toString());
 
     return this.http.get<Array<Recipe>>(url, { headers });
   }

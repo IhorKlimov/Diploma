@@ -11,6 +11,7 @@ import { LocalStorageService } from '../../services/local-storage.service';
 import { FeedRecipeComponent } from '../../components/feed-recipe/feed-recipe.component';
 import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
 import { RecipeService } from '../../services/recipe.service';
+import { SearchQuery } from '../../models/search-query';
 
 @Component({
   selector: 'app-home',
@@ -66,5 +67,9 @@ export class HomeComponent {
         this.appState.setError(error.error);
       }
     }
+  }
+
+  onSearchChanged(searchQuery: SearchQuery) {
+    this.recipeService.getRecipes(null, false, searchQuery).subscribe(data => this.recipes = data);
   }
 }

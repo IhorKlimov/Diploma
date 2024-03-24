@@ -1,5 +1,5 @@
 <div class="root">
-    <app-search-bar></app-search-bar>
+    <app-search-bar (onSearchChanged)="onSearchChanged($event)"></app-search-bar>
 
     <div class="list">
         <div *ngFor="let recipe of recipes">
