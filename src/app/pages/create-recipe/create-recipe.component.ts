@@ -10,14 +10,14 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { lastValueFrom } from 'rxjs';
+import { CategorySelectorComponent } from '../../components/category-selector/category-selector.component';
+import { DifficultySelectorComponent } from '../../components/difficulty-selector/difficulty-selector.component';
+import { Category } from '../../models/category';
+import { Difficulty } from '../../models/difficulty';
 import { AppStateService } from '../../services/app-state.service';
 import { FileStorageService } from '../../services/file-storage.service';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { RecipeService } from '../../services/recipe.service';
-import { CategorySelectorComponent } from '../../components/category-selector/category-selector.component';
-import { Category } from '../../models/category';
-import { DifficultySelectorComponent } from '../../components/difficulty-selector/difficulty-selector.component';
-import { Difficulty } from '../../models/difficulty';
 
 @Component({
   selector: 'app-create-recipe',
@@ -81,7 +81,6 @@ export class CreateRecipeComponent implements OnInit {
       }
     }
   }
-
 
   fileChangeEvent(event: any): void {
     this.showCropModal = true;

@@ -30,6 +30,9 @@ export class RecipeService {
       if (query.query) {
         params = params.append("query", query.query);
       }
+      if (query.selectedDifficulty) {
+        params = params.append("difficulty", query.selectedDifficulty._id);
+      }
       if (query.selectedCategories) {
         params = params.append("categories", query.selectedCategories.map(c => c._id).toString());
       }
