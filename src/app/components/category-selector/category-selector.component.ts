@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FeedRecipeComponent } from '../feed-recipe/feed-recipe.component';
-import { FormsModule } from '@angular/forms';
+import { AbstractControl, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { Category } from '../../models/category';
@@ -10,12 +10,15 @@ import { CategoryService } from '../../services/category.service';
 @Component({
   selector: 'app-category-selector',
   standalone: true,
-  imports: [FeedRecipeComponent, FormsModule, InputTextModule, MultiSelectModule,],
+  imports: [FeedRecipeComponent, FormsModule, InputTextModule, MultiSelectModule, ReactiveFormsModule,],
   templateUrl: './category-selector.component.html',
   styleUrl: './category-selector.component.css'
 })
 export class CategorySelectorComponent implements OnInit {
-  selectedCategories: Category[] = [];
+  selectedCategories!: FormControl;
+  @Input('selectedCategories') set _selectedCategories(value: any) {
+    this.selectedCategories = value as FormControl;
+  }
   categories!: Category[];
 
   constructor(
@@ -29,5 +32,4 @@ export class CategorySelectorComponent implements OnInit {
       error: (e) => this.appState.setError(e.error),
     });
   }
-
 }

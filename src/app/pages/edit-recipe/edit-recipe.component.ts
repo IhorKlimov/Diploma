@@ -52,6 +52,7 @@ export class EditRecipeComponent implements OnInit {
       photo: new FormControl(null, [Validators.required]),
       originalPhoto: new FormControl(null, []),
       photoFile: new FormControl(null, []),
+      selectedCategories: new FormControl(null, []),
       title: new FormControl(null, [Validators.required]),
       text: new FormControl(null, [Validators.required]),
     }, {});

@@ -41,7 +41,7 @@ export class RecipeService {
     });
   }
 
-  updateRecipe(recipeId: string, title: string, text: string, imageUrl: string, session?: string | null) {
+  updateRecipe(recipeId: string, title: string, text: string, imageUrl: string,  session?: string | null) {
     const body = new URLSearchParams();
     body.set('title', title);
     body.set('text', text);
