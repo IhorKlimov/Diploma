@@ -25,19 +25,20 @@ export class RecipeService {
         'session': localStorage.getItem('session')!,
       });
     }
-    console.log(query);
 
     if (query) {
       if (query.query) {
         params = params.append("query", query.query);
       }
       if (query.selectedCategories) {
-        params = params.append("categories", query.selectedCategories!.toString());
+        params = params.append("categories", query.selectedCategories.map(c => c._id).toString());
       }
     }
 
-    url += `?${params.toString()}`;
-    console.log(url, params.toString());
+    if (params.toString().length != 0) {
+      url += `?${params.toString()}`;
+    }
+    console.log(url);
 
     return this.http.get<Array<Recipe>>(url, { headers });
   }

@@ -1,5 +1,5 @@
 .search-area {
     display: flex;
-    justify-content: end;
+    justify-content: center;
     column-gap: 20px;
 }

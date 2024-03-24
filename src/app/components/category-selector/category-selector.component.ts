@@ -1,7 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FeedRecipeComponent } from '../feed-recipe/feed-recipe.component';
-import { AbstractControl, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { InputTextModule } from 'primeng/inputtext';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { Category } from '../../models/category';
 import { AppStateService } from '../../services/app-state.service';
@@ -10,7 +8,7 @@ import { CategoryService } from '../../services/category.service';
 @Component({
   selector: 'app-category-selector',
   standalone: true,
-  imports: [FeedRecipeComponent, FormsModule, InputTextModule, MultiSelectModule, ReactiveFormsModule,],
+  imports: [FormsModule, MultiSelectModule, ReactiveFormsModule,],
   templateUrl: './category-selector.component.html',
   styleUrl: './category-selector.component.css'
 })
