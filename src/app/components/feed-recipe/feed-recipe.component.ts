@@ -36,4 +36,8 @@ export class FeedRecipeComponent {
   triggerFavorite() {
     this.onFavoriteClicked.emit(this.recipe._id);
   }
+
+  getFormattedCategories() {
+    return this.recipe.categories.map(c => c.name).join(', ');
+  }
 }

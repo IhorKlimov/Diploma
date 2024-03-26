@@ -13,7 +13,8 @@
 
 .name {
     font-weight: 500;
-    margin-top: 10px;
+    font-size: 1.15rem;
+    margin-top: 5px;
     margin-bottom: 5px;
 }
 
@@ -34,7 +35,15 @@ img {
     object-fit: cover;
 }
 
+.categories {
+    margin-top: 10px;
+    /* margin-bottom: 10px; */
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
 .bottom-row {
+    font-weight: 300;
     display: flex;
     margin-top: 10px;
     align-items: center;
