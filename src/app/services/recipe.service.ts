@@ -36,6 +36,9 @@ export class RecipeService {
       if (query.selectedCategories) {
         params = params.append("categories", query.selectedCategories.map(c => c._id).toString());
       }
+      if (query.sortBy) {
+        params = params.append("sortBy", query.sortBy._id.toString());
+      }
     }
 
     if (params.toString().length != 0) {

@@ -8,12 +8,13 @@ import { CategoryService } from '../../services/category.service';
 import { CategorySelectorComponent } from '../category-selector/category-selector.component';
 import { DifficultySelectorComponent } from '../difficulty-selector/difficulty-selector.component';
 import { FeedRecipeComponent } from '../feed-recipe/feed-recipe.component';
+import { SortOptionSelectorComponent } from '../sort-option-selector/sort-option-selector.component';
 
 @Component({
   selector: 'app-search-bar',
   standalone: true,
-  imports: [FeedRecipeComponent, FormsModule, InputTextModule, MultiSelectModule, CategorySelectorComponent, ReactiveFormsModule,
-    DifficultySelectorComponent,],
+  imports: [FeedRecipeComponent, FormsModule, InputTextModule, MultiSelectModule,
+    CategorySelectorComponent, ReactiveFormsModule, DifficultySelectorComponent, SortOptionSelectorComponent,],
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.css'
 })
@@ -31,11 +32,11 @@ export class SearchBarComponent implements OnInit {
       query: new FormControl(null, []),
       selectedDifficulty: new FormControl(null, []),
       selectedCategories: new FormControl(null, []),
+      sortBy: new FormControl(null, []),
     }, {});
 
     this.form.valueChanges.subscribe(val => {
       this.onSearchChanged.emit(val);
     });
   }
-
 }

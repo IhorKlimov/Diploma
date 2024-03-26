@@ -32,7 +32,7 @@ export class HomeComponent {
   ) { }
 
   ngOnInit() {
-    this.recipeService.getRecipes(null, false).subscribe(data => this.recipes = data);
+    // this.recipeService.getRecipes(null, false).subscribe(data => this.recipes = data);
     this.storageService.getSession.subscribe(value => {
       this.fetchFavoriteRecipes(value);
     });
