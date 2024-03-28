@@ -38,6 +38,13 @@
             <app-difficulty-selector [selectedDifficulty]="form.get('selectedDifficulty')"></app-difficulty-selector>
         </div>
 
+        <div class="input-field">
+            <span class="p-float-label">
+                <p-inputNumber inputId="integeronly" formControlName="servings"> </p-inputNumber>
+                <label for="number-input">Number of servings</label>
+            </span>
+        </div>
+
         <div class="card">
             <p-editor #editor formControlName="text" [style]="{ minHeight: '350px'}"></p-editor>
         </div>

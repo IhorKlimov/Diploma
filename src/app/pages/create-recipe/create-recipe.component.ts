@@ -18,13 +18,14 @@ import { AppStateService } from '../../services/app-state.service';
 import { FileStorageService } from '../../services/file-storage.service';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { RecipeService } from '../../services/recipe.service';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @Component({
   selector: 'app-create-recipe',
   standalone: true,
   imports: [InputTextModule, ButtonModule, FormsModule, PasswordModule, ImageCropperModule, DialogModule,
     NgIf, ReactiveFormsModule, NgClass, JsonPipe, FileUploadModule, RouterLink, EditorModule, CategorySelectorComponent,
-    DifficultySelectorComponent,],
+    DifficultySelectorComponent, InputNumberModule,],
   templateUrl: './create-recipe.component.html',
   styleUrl: './create-recipe.component.css',
 })
@@ -51,6 +52,7 @@ export class CreateRecipeComponent implements OnInit {
       selectedCategories: new FormControl([], [Validators.required]),
       selectedDifficulty: new FormControl(null, [Validators.required]),
       title: new FormControl(null, [Validators.required]),
+      servings: new FormControl(null, [Validators.required]),
       text: new FormControl(null, [Validators.required]),
     }, {});
   }
@@ -68,6 +70,7 @@ export class CreateRecipeComponent implements OnInit {
         fileUploadResult.imageUrl,
         categories.map((e) => e._id),
         difficulty._id,
+        this.form.get('servings')?.value,
       ));
 
       this.router.navigate([`recipe/${response.recipeId}`]);

@@ -20,6 +20,7 @@ import { RecipeService } from '../../services/recipe.service';
 import { Category } from '../../models/category';
 import { DifficultySelectorComponent } from '../../components/difficulty-selector/difficulty-selector.component';
 import { Difficulty } from '../../models/difficulty';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @Component({
   selector: 'app-edit-recipe',
@@ -27,7 +28,7 @@ import { Difficulty } from '../../models/difficulty';
   providers: [ConfirmationService,],
   imports: [InputTextModule, ButtonModule, FormsModule, PasswordModule, ImageCropperModule, DialogModule,
     NgIf, ReactiveFormsModule, NgClass, JsonPipe, FileUploadModule, RouterLink, EditorModule, ConfirmDialogModule,
-    CategorySelectorComponent, DifficultySelectorComponent,],
+    CategorySelectorComponent, DifficultySelectorComponent, InputNumberModule, ],
   templateUrl: './edit-recipe.component.html',
   styleUrl: './edit-recipe.component.css'
 })
@@ -58,6 +59,7 @@ export class EditRecipeComponent implements OnInit {
       selectedCategories: new FormControl([], [Validators.required]),
       selectedDifficulty: new FormControl(null, [Validators.required]),
       title: new FormControl(null, [Validators.required]),
+      servings: new FormControl(null, [Validators.required]),
       text: new FormControl(null, [Validators.required]),
     }, {});
     this.recipeService.getRecipe(this.recipeId, true, localStorage.getItem('session')).subscribe({
@@ -67,6 +69,7 @@ export class EditRecipeComponent implements OnInit {
         this.form.get('photo')?.setValue(r.imageUrl);
         this.form.get('selectedCategories')?.setValue(r.categories);
         this.form.get('selectedDifficulty')?.setValue(r.difficulty);
+        this.form.get('servings')?.setValue(r.servings);
       },
       error: (e) => this.appStateService.setError(e.error),
     });
@@ -91,6 +94,7 @@ export class EditRecipeComponent implements OnInit {
         photo,
         categories.map((e) => e._id),
         difficulty._id,
+        this.form.get('servings')?.value,
         localStorage.getItem('session'),
       ));
 

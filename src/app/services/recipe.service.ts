@@ -69,8 +69,9 @@ export class RecipeService {
     imageUrl: string,
     categories: Array<string>,
     difficulty: string,
+    servings: number,
   ) {
-    const body = { title, text, imageUrl, categories, difficulty, };
+    const body = { title, text, imageUrl, categories, difficulty, servings, };
 
     const headers = new HttpHeaders({
       'session': localStorage.getItem('session')!,
@@ -89,9 +90,10 @@ export class RecipeService {
     imageUrl: string,
     categories: Array<string>,
     difficulty: string,
+    servings: number,
     session?: string | null
   ) {
-    const body = { title, text, imageUrl, recipeId, categories, difficulty, };
+    const body = { title, text, imageUrl, recipeId, categories, difficulty, servings, };
 
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',

@@ -12,5 +12,6 @@ export interface Recipe {
     categories: Category[],
     difficulty: Difficulty,
     rating?: number,
+    servings: number,
     author: Author
 }
